@@ -1,14 +1,14 @@
 <template>
 	<el-container>
 		<div class="container">
-			<el-row>
-				<el-col :span="12">
+			<el-row :gutter="20">
+				<el-col :span="16">
 					<div class="grid-content bg-purple">2222222
 						<p><a @click="setabc">abdddd</a></p>
 						
 						2222222</div>
-				</el-col>
-				<el-col :span="12">
+				</el-col> 
+				<el-col :span="8">
 					<div class="grid-content bg-purple-light">22222222222</div>
 				</el-col>
 			</el-row>
@@ -25,13 +25,9 @@
 			}
 		},
 		created(){
-			
+			this.$emit("SetHeader",true);
 		},
 		methods: {
-			setabc: function(){
-				console.log(this.$route.path);
-				this.$emit("transferUser",123);
-			}
 			
 		}
 	}

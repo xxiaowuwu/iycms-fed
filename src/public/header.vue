@@ -5,7 +5,7 @@
 				<a href=""><img src="/static/home/img/logo.png" alt="" /></a>
 			</div>
 			<ul>
-				<li v-for="vo,i in nav" @mouseenter="onAn(i)" @mouseleave="onAn(i)" :class="{ active: vo.active }">
+				<li v-for="vo,i in nav" @mouseenter="onAn(i)" @mouseleave="onAn(i)" :class="{ active: active(vo.url) }">
 					<router-link :to="vo.url"   >
 						{{vo.name}}
 						<i v-if="vo.list" class="iconfont">&#xe620;</i>
@@ -24,11 +24,10 @@
 <script>
 	export default {
 		name: 'header',
-		props: ['nav'],
+		props: ['nav','header2'],
 		data() {
 			return {
-				path : "/",
-				header2:false,
+				header2:false
 			}
 		},
 		computed: {
@@ -45,12 +44,11 @@
 					return false;
 				}
 			},
-			onAn: function(i) {
-				
+			onAn: function(i) {		
 				this.nav[i].an = !this.nav[i].an;
 			},
 			handleScroll:function(){
-				if(this.path=="/"){
+				if(this.$route.path=="/"){
 					if(document.body.scrollTop>640){
 						this.header2 = true;
 					}else{
@@ -59,9 +57,6 @@
 				}else{
 					this.header2 = true;
 				}
-			},
-			abc: function(){
-				console.log(11)
 			}
 		},
 	}
@@ -79,12 +74,11 @@
 		color: #333;
 		text-align: center;
 		line-height: 60px;
-		transition:all 2s;
-		-moz-transition:all 2s;
-		-webkit-transition:all 2s;
-		-o-transition:all 2s;
+		transition:all 1s;
+		-moz-transition:all 1s;
+		-webkit-transition:all 1s;
+		-o-transition:all 1s;
 	}
-	
 	
 	.el-header .logo {
 		float: left;
@@ -144,10 +138,10 @@
 	
 	
 	.el-header2 {
-		transition:all 2s;
-		-moz-transition:all 2s;
-		-webkit-transition:all 2s;
-		-o-transition:all 2s;
+		transition:all 1s;
+		-moz-transition:all 1s;
+		-webkit-transition:all 1s;
+		-o-transition:all 1s;
 		background-color: #FFF;
 		box-shadow: 0 0.0625rem 0.3125rem rgba(0,0,0,.09);
 	}

@@ -75,6 +75,9 @@
 			return {
 			}
 		},
+		created(){
+			this.$emit("SetHeader",false);
+		},
 	
 		
 	}
@@ -82,5 +85,4 @@
 
 <style>
 	@import "../../static/home/css/index.css";
-	
 </style>
