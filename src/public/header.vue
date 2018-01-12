@@ -1,8 +1,7 @@
 <template>
 	<el-header :class="{'el-header2':header2}">
 		<div class="container">
-			<div class="logo">
-				<a href=""><img src="/static/home/img/logo.png" alt="" /></a>
+			<div :class="{logo:true,logo2:header2}">
 			</div>
 			<ul>
 				<li v-for="vo,i in nav" @mouseenter="onAn(i)" @mouseleave="onAn(i)" :class="{ active: active(vo.url) }">
@@ -85,8 +84,20 @@
 		height: 60px;
 		width: 300px;
 		text-align: left;
+		background-image: url(/static/home/img/logo.png);
+		background-repeat: no-repeat;
+		transition:all 1s;
+		-moz-transition:all 1s;
+		-webkit-transition:all 1s;
+		-o-transition:all 1s;
 	}
-	
+	.el-header .logo2 {
+		transition:all 1s;
+		-moz-transition:all 1s;
+		-webkit-transition:all 1s;
+		-o-transition:all 1s;
+		background-position: 0px -60px;
+	}
 	.el-header ul {
 		float: right;
 		width: 800px;
