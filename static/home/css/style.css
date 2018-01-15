@@ -17,6 +17,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.iconfont +.iconfont{
+	margin-right: 5px;
+}
 /*element-ui 补充*/
 
 .el-pagination{
