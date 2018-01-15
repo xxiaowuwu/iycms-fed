@@ -14,7 +14,7 @@
 			return {
 				show: false,
 				header2: false,
-				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"留言",url:"/experiment"},{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
+				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"留言",url:"/222"},{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
 			};
 		},
 		

@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import index from './controller/index'
 import article from './controller/article'
 import archive from './controller/archive'
+import experiment from './controller/experiment'
 
 Vue.use(Router)
 
@@ -30,6 +31,10 @@ export default new Router({
 			path: "/archive",
 			name: "归档",
 			component: archive
+		},{
+			path: "/experiment",
+			name: "实验室",
+			component: experiment
 		}
 	]
 })
