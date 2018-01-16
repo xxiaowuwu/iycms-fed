@@ -49,12 +49,12 @@
 			handleScroll:function(){
 				if(this.$route.path=="/"){
 					if(document.body.scrollTop>640){
-						this.header2 = true;
+						this.$emit("SetHeader",true);
 					}else{
-						this.header2 = false;
+						this.$emit("SetHeader",false);
 					}
 				}else{
-					this.header2 = true;
+					this.$emit("SetHeader",true);
 				}
 			}
 		},

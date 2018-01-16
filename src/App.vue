@@ -1,11 +1,14 @@
 <template>
-	<div id="app" v-loading.fullscreen.lock="!show">
-		<Header :nav="nav" :header2="header2" ></Header>
+	<div id="app" v-loading.fullscreen.lock="!show" @click="floating">
+		<Header :nav="nav" :header2="header2" @SetHeader="set_header2"  ></Header>
 		<router-view @SetHeader="set_header2" ></router-view>
 		<Footer></Footer>
 		<div :class="{'maskl':true,'maskl2':show}"></div>
 		<div :class="{'maskr':true,'maskr2':show}"></div>
 		<!--<img v-show="!show" src="../static/home/img/loading.gif" id="loading" />-->
+		<div class="floatig">
+			<font v-for="vo in keys" v-show="vo.show" :style="{top:vo.y,left:vo.x}">{{vo.name}}</font>
+		</div>
 	</div>
 </template> 
 <script>
@@ -14,7 +17,17 @@
 			return {
 				show: false,
 				header2: false,
-				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"留言",url:"/222"},{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
+				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},
+				{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"留言",url:"/leave"},
+				{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
+				keys:[
+					{name:"php",color:"#000",show:false,y:0,x:0},
+					{name:"css",color:"#000",show:false,y:0,x:0},
+					{name:"python",color:"#000",show:false,y:0,x:0},
+					{name:"java",color:"#000",show:false,y:0,x:0},
+					{name:"mysql",color:"#000",show:false,y:0,x:0},
+					{name:"php",color:"#000",show:false,y:0,x:0},
+				]
 			};
 		},
 		
@@ -24,14 +37,29 @@
 		mounted: function(){
 			var self = this;
 			setTimeout(function(){
-				console.log(self.show)
 				self.show = true;
-			},3000)
+			},3000/1000)
+		
 		},
 		methods: {
+			//导航状态
 			set_header2:function(e){
 				this.header2 = e;
-				console.log(this.show)
+			},
+			floating : function(e){
+				//$("body").css("color","#F00")
+				//console.log(e);
+				var self = this;
+				var n = parseInt(Math.random()*(self.keys.length));
+				
+				self.keys[n].y = e.clientY+111;
+				self.keys[n].x = e.clientX;
+				self.keys[n].show = true;
+				
+				self.keys = self.keys;
+				setTimeout(function(){
+					self.keys[n].show = false;
+				},1000)
 			}
 		},
 		
@@ -39,14 +67,11 @@
 </script>
 
 <style>
-	#loading{
+	.floatig font{
 		position: fixed;
-		width: 814px;
-		height: 400px;
-		top: 50%;
-		left: 50%;
-		margin-left: -407px;
-		margin-top: -200px;
+		top: 0;
+		left: 0;
+		color: #000;
 		z-index: 102;
 	}
 	.maskl,.maskr{

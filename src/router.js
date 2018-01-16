@@ -4,6 +4,7 @@ import index from './controller/index'
 import article from './controller/article'
 import archive from './controller/archive'
 import experiment from './controller/experiment'
+import leave from './controller/leave'
 
 Vue.use(Router)
 
@@ -35,6 +36,10 @@ export default new Router({
 			path: "/experiment",
 			name: "实验室",
 			component: experiment
+		},{
+			path: "/leave",
+			name: "留言",
+			component: leave
 		}
 	]
 })

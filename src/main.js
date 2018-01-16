@@ -5,6 +5,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../static/home/css/style.css'
 import 'element-ui/lib/index.js'
+import $ from '../static/home/js/jquery.js'
 import header from './public/header'
 import footer from './public/footer'
 Vue.use(ElementUI)
