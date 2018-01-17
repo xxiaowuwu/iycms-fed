@@ -83,6 +83,7 @@ const webpackConfig = merge(baseWebpackConfig, {
     // enable scope hoisting
     new webpack.optimize.ModuleConcatenationPlugin(),
     // split vendor js into its own file
+<<<<<<< HEAD
 //  new webpack.optimize.CommonsChunkPlugin({
 //    name: 'vendor',
 //    minChunks (module) {
@@ -101,6 +102,26 @@ const webpackConfig = merge(baseWebpackConfig, {
 //  new webpack.optimize.CommonsChunkPlugin({
 //    name: 'manifest',
 //    minChunks: Infinity
+=======
+//  new webpack.optimize.CommonsChunkPlugin({
+//    name: 'vendor',
+//    minChunks (module) {
+//      // any required modules inside node_modules are extracted to vendor
+//      return (
+//        module.resource &&
+//        /\.js$/.test(module.resource) &&
+//        module.resource.indexOf(
+//          path.join(__dirname, '../node_modules')
+//        ) === 0
+//      )
+//    }
+//  }),
+    // extract webpack runtime and module manifest to its own file in order to
+    // prevent vendor hash from being updated whenever app bundle is updated
+//  new webpack.optimize.CommonsChunkPlugin({
+//    name: 'manifest',
+//    minChunks: Infinity
+>>>>>>> ef7edd3f49ee2ebd52f8131fa6da54b4f3e58f99
 //  }),
     // This instance extracts shared chunks from code splitted chunks and bundles them
     // in a separate chunk, similar to the vendor chunk
@@ -115,7 +136,11 @@ const webpackConfig = merge(baseWebpackConfig, {
     // copy custom static assets
     new CopyWebpackPlugin([
       {
+<<<<<<< HEAD
         from: path.resolve(__dirname, '../static'),
+=======
+        from: path.resolve(__dirname, '../static/home'),
+>>>>>>> ef7edd3f49ee2ebd52f8131fa6da54b4f3e58f99
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }

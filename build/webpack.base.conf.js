@@ -40,6 +40,10 @@ module.exports = {
   },
   module: {
     rules: [
+<<<<<<< HEAD
+=======
+      
+>>>>>>> ef7edd3f49ee2ebd52f8131fa6da54b4f3e58f99
       {
         test: /\.vue$/,
         loader: 'vue-loader',

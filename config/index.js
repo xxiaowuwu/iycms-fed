@@ -15,9 +15,15 @@ module.exports = {
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+<<<<<<< HEAD
     autoOpenBrowser: true,
     errorOverlay: false,
     notifyOnErrors: false,
+=======
+    autoOpenBrowser: false,
+    errorOverlay: true,
+    notifyOnErrors: true,
+>>>>>>> ef7edd3f49ee2ebd52f8131fa6da54b4f3e58f99
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
     // Use Eslint Loader?
@@ -56,7 +62,11 @@ module.exports = {
      * Source Maps
      */
 
+<<<<<<< HEAD
     productionSourceMap: false,
+=======
+    productionSourceMap: true,
+>>>>>>> ef7edd3f49ee2ebd52f8131fa6da54b4f3e58f99
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 
@@ -65,7 +75,11 @@ module.exports = {
     // Before setting to `true`, make sure to:
     // npm install --save-dev compression-webpack-plugin
     productionGzip: false,
+<<<<<<< HEAD
    // productionGzipExtensions: ['js', 'css'],
+=======
+    productionGzipExtensions: ['js', 'css'],
+>>>>>>> ef7edd3f49ee2ebd52f8131fa6da54b4f3e58f99
 
     // Run the build command with an extra argument to
     // View the bundle analyzer report after build finishes:
