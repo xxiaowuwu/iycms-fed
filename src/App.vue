@@ -5,9 +5,8 @@
 		<Footer></Footer>
 		<div :class="{'maskl':true,'maskl2':show}"></div>
 		<div :class="{'maskr':true,'maskr2':show}"></div>
-		<!--<img v-show="!show" src="../static/home/img/loading.gif" id="loading" />-->
 		<div class="floatig">
-			<font v-for="vo in keys" v-show="vo.show" :style="{top:vo.y,left:vo.x}">{{vo.name}}</font>
+			<font v-for="vo in keys" v-show="vo.show" :style="{top:vo.yy+'px',left:vo.xx+'px',opacity:vo.opacity}">{{vo.name}}</font>
 		</div>
 	</div>
 </template> 
@@ -15,19 +14,20 @@
 	export default {
 		data() {
 			return {
-				show: false,
+				show: true,
 				header2: false,
 				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},
 				{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"留言",url:"/leave"},
 				{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
 				keys:[
-					{name:"php",color:"#000",show:false,y:0,x:0},
-					{name:"css",color:"#000",show:false,y:0,x:0},
-					{name:"python",color:"#000",show:false,y:0,x:0},
-					{name:"java",color:"#000",show:false,y:0,x:0},
-					{name:"mysql",color:"#000",show:false,y:0,x:0},
-					{name:"php",color:"#000",show:false,y:0,x:0},
-				]
+					{name:"php",show:false,yy:0,xx:0,opacity:1},
+					{name:"css",show:false,yy:0,xx:0,opacity:1},
+					{name:"python",show:false,yy:0,xx:0,opacity:1},
+					{name:"java",show:false,yy:0,xx:0,opacity:1},
+					{name:"mysql",show:false,yy:0,xx:0,opacity:1},
+					{name:"php",show:false,yy:0,xx:0,opacity:1},
+				],
+				i:0
 			};
 		},
 		
@@ -47,21 +47,28 @@
 				this.header2 = e;
 			},
 			floating : function(e){
-				//$("body").css("color","#F00")
-				//console.log(e);
+				if(e.target.nodeName=="A" || e.target.nodeName=="I"){
+					return false;
+				}
 				var self = this;
-				var n = parseInt(Math.random()*(self.keys.length));
-				
-				self.keys[n].y = e.clientY+111;
-				self.keys[n].x = e.clientX;
+				var n = self.i
+				self.keys[n].yy = e.clientY;
+				self.keys[n].xx = e.clientX;
 				self.keys[n].show = true;
+				self.keys[n].opacity = 1;
+				setTimeout(function(){
+					self.keys[n].opacity = 0.3;
+					self.keys[n].yy = e.clientY-20;
+				},10)
 				
-				self.keys = self.keys;
 				setTimeout(function(){
 					self.keys[n].show = false;
 				},1000)
+				
+				self.i = (self.i==self.keys.length-1) ? 0 : ++self.i;
 			}
 		},
+		
 		
 	}
 </script>
@@ -69,10 +76,21 @@
 <style>
 	.floatig font{
 		position: fixed;
-		top: 0;
 		left: 0;
-		color: #000;
-		z-index: 102;
+		top: 0;
+		cursor:default;
+		color: #009688;
+		-webkit-touch-callout: none; /* iOS Safari */
+		-webkit-user-select: none; /* Chrome/Safari/Opera */
+		-khtml-user-select: none; /* Konqueror */
+		-moz-user-select: none; /* Firefox */
+		-ms-user-select: none; /* Internet Explorer/Edge */
+		user-select: none; /* Non-prefixed version, currently
+		not supported by any browser */
+		transition:all 2s;
+		-moz-transition:all 2s;
+		-webkit-transition:all 2s;
+		-o-transition:all 2s;
 	}
 	.maskl,.maskr{
 		position: fixed;
