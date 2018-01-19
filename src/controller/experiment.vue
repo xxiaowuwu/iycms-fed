@@ -8,9 +8,9 @@
 						<strong>这是标题这是标题这是标题这是标题这是标题</strong></router-link>
 						<p>这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述</p>
 						<span>
-							
+
 							<i class="iconfont l">2017-11-15</i>
-							
+
 							<i class="iconfont r">&#xe68a;123</i>
 								<i class="iconfont r">&#xe681;233</i>
 								<i class="iconfont r">&#xe604;33</i></span>
@@ -45,7 +45,7 @@
 	.experiment ul li{
 		width: 25%; padding: 0 10px;
 		margin-bottom: 20px;
-		
+
 		overflow: hidden;
 	}
 	.experiment ul li *{
@@ -57,10 +57,10 @@
 	.experiment ul li span,.experiment ul li p{
     	padding:0 10px 10px 10px;
 	}
-	
+
 	.experiment ul li strong{
 		display: block;
-		
+
 		padding:5px 10px 5px 10px;
 		white-space: nowrap;
     	text-overflow: ellipsis;
@@ -80,12 +80,12 @@
 	    -webkit-line-clamp: 4;
 	    -webkit-box-orient: vertical;
 	}
-	
+
 	.experiment ul li:nth-child(4n){
 		padding: 0px 0px 0px 10px;
 	}
 	.experiment ul li:nth-child(4n-3){
 		padding: 0px 10px 0px 0px;
 	}
-	
+
 </style>

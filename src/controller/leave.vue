@@ -4,7 +4,6 @@
 			<div class="leave">
 				<el-input type="textarea" :rows="5" resize="none" placeholder="请输入想您说的话..." v-model="content">
 				</el-input>
-				
 				<div class="tools">
 					<i @click="setB" class="iconfont">&#xe6fe;</i>
 					<i @click="setURL" class="iconfont">&#xe63e;</i>
@@ -16,21 +15,14 @@
 				</div>
 			</div>
 			<div class="leave-content">
-				
-				
 				<ul>
-					
-					
-					<li v-for="vo in [10,12,13,14,15,16,17,19,20,21,22,23]">
-						
-						
-						<span><img src="/static/home/img/article-li.jpg" /> <b></b></span>
-						<div>
-							<h2>姓名</h2>
-							<p>这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言</p>
+					<li v-for="vo in [10,12,13,14,15,16,17,19,20,21,22,23]" :class="{h:vo==13}">
+						<div class="l img"><img src="/static/home/img/article-li.jpg" /></div>
+						<div class="l content">
+							<h4>姓名</h4>
+							<p>这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留</p>
 							<span>2015-15-15 12:23:12 来自xxxxxx x </span>
 						</div>
-						
 					</li>
 				</ul>
 				</div>

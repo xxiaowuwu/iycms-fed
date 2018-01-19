@@ -14,21 +14,21 @@
 							<p>推出模板建站系统，用户可通过网站直接自助下单，实现自助建站，模板建站主要针对网站建设小需求客户，最大的优点就是价格低、速度快，如果选用海外空间，可以立刻上线网站。缺点当然是可能会撞脸。下面方维网络把客户常见的问题以及答案整理如建站系统，用户可通过网站直接自助下单，实现自助建站，模板建站主要针对网站建设小需求客户，最大当然是可能会撞脸。下面方维网络把客户常见的问题以及答案整理如建站系统，用户可通过网站直接自助下单，实现自助建站，模板建站主要针对网站建设小需求客户，最大的优点就是价格低、速度快，如果选用海外空间，可以立刻上线网站。缺点当然是可能会撞脸。下面方维网络把客户常见的问题以及答案整理如下： 1、建站版本基础版、标准...
 							</p>
 							<div class="article-info"><a href="">某某分类</a> 2018-01-15 15:55:33
-							
+
 							<span class="r">
 								<i class="iconfont">&#xe68a;123</i>
 								<i class="iconfont">&#xe681;233</i>
 								<i class="iconfont">&#xe604;33</i>
-								
+
 							</span></div>
 						</el-col>
 					</el-row>
-					
+
 					<div class="page">
 						<el-pagination background :page-size="30"   @size-change="handleSizeChange"
-      @current-change="handleCurrentChange" layout="prev, pager, next"  :total="100"> </el-pagination>
+			@current-change="handleCurrentChange" layout="prev, pager, next"  :total="100"> </el-pagination>
 					</div>
-					
+
 				</el-col>
 				<el-col :span="6">
 					<div class="article-type article-r">
@@ -40,10 +40,10 @@
 									</li>
 								</ul>
 							</li>
-						
+
 						</ul>
 					</div>
-					
+
 					<div class="article-key article-r">
 						<div class="title"><h1 class="l">热门标签</h1> <router-link class="r" to="/">>更多</router-link></div>
 						<div class="content">
@@ -62,11 +62,11 @@
 							<router-link to="/"><el-tag type="info">标签三有</el-tag></router-link>
 							<router-link to="/"><el-tag type="warning">四</el-tag></router-link>
 							<router-link to="/"><el-tag type="danger">标签五人</el-tag></router-link>
-							
-							
+
+
 						</div>
 					</div>
-					
+
 					<div class="article-hot article-r">
 						<div class="title"><h1 class="l">热门文章</h1> <router-link class="r" to="/">>更多</router-link></div>
 						<div class="content">
@@ -74,7 +74,7 @@
 								<li v-for="vo,i in 10"> <router-link to="/">我是文单1{{vo}}1111</router-link> <span class="r">{{i}}</span></li>
 							</ul>
 						</div>
-						
+
 					</div>
 				</el-col>
 			</el-row>
@@ -107,11 +107,11 @@
 		},
 		methods: {
 			 handleSizeChange(val) {
-		        console.log(`每页 ${val} 条`);
-		      },
-		      handleCurrentChange(val) {
-		        console.log(`当前页: ${val}`);
-		      }
+						console.log(`每页 ${val} 条`);
+					},
+					handleCurrentChange(val) {
+						console.log(`当前页: ${val}`);
+					}
 		}
 	}
 </script>
