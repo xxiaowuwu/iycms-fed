@@ -15,10 +15,15 @@
 					<el-button class="r">提交留言</el-button>
 				</div>
 			</div>
-			
 			<div class="leave-content">
+				
+				
 				<ul>
+					
+					
 					<li v-for="vo in [10,12,13,14,15,16,17,19,20,21,22,23]">
+						
+						
 						<span><img src="/static/home/img/article-li.jpg" /> <b></b></span>
 						<div>
 							<h2>姓名</h2>
@@ -77,92 +82,6 @@
 </script>
 
 <style>
-	.leave{
-		padding: 20px;	
-		background: #FFFFFF;
-		overflow: hidden;
-		-webkit-box-shadow: 0px 0px 15px #ccc;
-   		 box-shadow: 0px 0px 15px #ccc;
-	}
-	.leave .tools{
-		margin-top: 5px;
-	}
-	.leave .tools i{
-		font-size: 30px;
-		color: #999999;
-	}
-	.leave .tools i:hover{
-		color: #009688;
-		cursor:pointer;
-	}
 	
-	
-.leave-content{
-	margin-top: 20px;
-}
-.leave-content > ul {
-	margin-bottom: 20px;
-}
-
-.leave-content > ul li{
-	overflow: hidden;
-	background-color: #FFF;
-	width: 100%;
-	margin-bottom: 20px;
-	-webkit-box-shadow: 0px 0px 15px #ccc;
-    box-shadow: 0px 0px 15px #ccc;
-}
-
-.leave-content > ul li img{
-	width: 50px;
-	height: 50px;
-}
-
-.leave-content > ul li > span{
-	width: 100px;
-	display: block;
-	float: left;
-	border-right: solid 1px #CCCCCC;
-	padding-bottom: 20px;
-	margin-right: 20px;
-	position: relative;
-}
-
-.leave-content > ul li > span{
-	width: 100px;
-	display: block;
-	float: left;
-	border-right: solid 1px #CCCCCC;
-	padding-bottom: 20px;
-	margin-right: 20px;
-	position: relative;
-	font-size: 16px;
-	text-align: right;
-	padding-right: 27px;
-}
-
-.leave-content > ul li b{
-	position: absolute;
-}
-.leave-content > ul li em{
-	color: #666;
-	padding-right: 5px;
-	font-style:normal;
-}
-
-
-
-.leave-content > ul li > span b{
-	width: 10px;
-	height: 10px;
-	display: block;
-	background-color: #009688;
-	float: right;
-	border-radius:50%;
-	-moz-border-radius:50%;
-	right: -5px;
-    top: 15px;
-}
-
 	
 </style>
