@@ -587,11 +587,43 @@ span {
 
 .leave-content {
 	margin-top: 20px;
+	overflow: hidden;
 }
 
 .leave-content>ul {
 	margin-bottom: 20px;
+	width: 900px;
+	margin-right: 20px;
 }
+
+.leave-content .hot {
+	width: 280px;
+	padding: 10px;
+    background-color: #FFFFFF;
+    margin-bottom: 20px;
+    -webkit-box-shadow: 0px 0px 15px #ccc;
+    box-shadow: 0px 0px 15px #ccc;
+}
+
+.leave-content .hot div.title {
+	border-bottom: dashed 1px #ccc;
+	padding-bottom: 8px;
+	overflow: hidden;
+}
+
+.leave-content .hot div.title h1 {
+	font-size: 18px;
+}
+
+.leave-content .hot div.title a {
+	font-size: 14px;
+}
+
+.leave-content .hot div.title a {
+	font-size: 14px;
+}
+
+
 
 .leave-content>ul li {
 	overflow: hidden;
@@ -618,7 +650,7 @@ span {
 }
 
 .leave-content>ul li .img:before {
-		    content: "";
+	content: "";
     position: absolute;
     top: 45px;
     right: 0px;
@@ -626,7 +658,7 @@ span {
     border-right-color: #ccc;
 }
 .leave-content>ul li .img:after {
-		content: "";
+	content: "";
     position: absolute;
     top: 45px;
     right: -1.5px;
@@ -637,6 +669,7 @@ span {
 .leave-content>ul li .content {
 	padding: 10px;
 	border-left: solid 1px #CCCCCC;
+	width: 800px;
 }
 
 .leave-content>ul li .content p{
@@ -653,7 +686,11 @@ span {
 	color: #666;
 }
 
-.leave-content>ul li.h {
-	margin-left: 100px;
-	width: 1100px;
+.leave-content>ul li .content .reply{
+	border-top: 1px #ccc dashed;
+    margin-top: 9px;
+    padding-top: 5px;
+    width: 100%;
 }
+
+

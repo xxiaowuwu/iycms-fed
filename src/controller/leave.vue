@@ -15,22 +15,45 @@
 				</div>
 			</div>
 			<div class="leave-content">
-				<ul>
-					<li v-for="vo in [10,12,13,14,15,16,17,19,20,21,22,23]" :class="{h:vo==13}">
+				<ul class="l">
+					<li v-for="vo in [10,12,13,14,15,16,17,19,20,21,22,23]">
 						<div class="l img"><img src="/static/home/img/article-li.jpg" /></div>
 						<div class="l content">
 							<h4>姓名</h4>
-							<p>这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留</p>
+							<p>这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留</p>
 							<span>2015-15-15 12:23:12 来自xxxxxx x </span>
+							
+							
+							<div class="reply">
+								<h4>姓名</h4>
+								<p><a href="">@博主</a>这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留这是留言这是留言这是留言这是留</p>
+								<span>2015-15-15 12:23:12 来自xxxxxx x </span>
+							</div>
+							
+							
+							<div class="reply">
+								<h4>姓名</h4>
+								<p>这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留</p>
+								<span>2015-15-15 12:23:12 来自xxxxxx x </span>
+							</div>
+							
 						</div>
 					</li>
 				</ul>
+					<div class="hot l">
+						<div class="title"><h1 class="l">热门文章</h1> <router-link class="r" to="/">>更多</router-link></div>
+						<div class="content">
+							<ul>
+								<li v-for="vo,i in 10"> <router-link to="/">我是文单1{{vo}}1111</router-link> <span class="r">{{i}}</span></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 				
 				<div class="page">
-						<el-pagination background :page-size="30"   @size-change="handleSizeChange"
+					<el-pagination background :page-size="30"   @size-change="handleSizeChange"
       @current-change="handleCurrentChange" layout="prev, pager, next"  :total="100"> </el-pagination>
-					</div>
+				</div>
 		</div>
 	</el-container>
 </template>
