@@ -153,7 +153,7 @@
 		-moz-transition:all 1s;
 		-webkit-transition:all 1s;
 		-o-transition:all 1s;
-		background-color: #FFF;
+		background-color: rgba(255,255,255,0.5);
 		box-shadow: 0 0.0625rem 0.3125rem rgba(0,0,0,.09);
 	}
 	

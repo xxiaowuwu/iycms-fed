@@ -21,12 +21,12 @@
 						<div class="l content">
 							<h4>姓名</h4>
 							<p>这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留</p>
-							<span>2015-15-15 12:23:12 来自xxxxxx x </span>
-							
+							<span>2015-15-15 12:23:12 来自xxxxxx x  <a href="javascript:;">回复</a></span>
+							<i class="iconfont">&#xe6f1;12</i>
 							
 							<div class="reply">
 								<h4>姓名</h4>
-								<p><a href="">@博主</a>这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留这是留言这是留言这是留言这是留</p>
+								<p><a href="">@博主</a> 这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留这是留言这是留言这是留言这是留</p>
 								<span>2015-15-15 12:23:12 来自xxxxxx x </span>
 							</div>
 							
@@ -48,6 +48,25 @@
 							</ul>
 						</div>
 					</div>
+					
+					<div class="hot l">
+						<div class="title"><h1 class="l">热门文章</h1> <router-link class="r" to="/">>更多</router-link></div>
+						<div class="content">
+							<ul>
+								<li v-for="vo,i in 10"> <router-link to="/">我是文单1{{vo}}1111</router-link> <span class="r">{{i}}</span></li>
+							</ul>
+						</div>
+					</div>
+					
+					<div class="hot l">
+						<div class="title"><h1 class="l">热门文章</h1> <router-link class="r" to="/">>更多</router-link></div>
+						<div class="content">
+							<ul>
+								<li v-for="vo,i in 10"> <router-link to="/">我是文单1{{vo}}1111</router-link> <span class="r">{{i}}</span></li>
+							</ul>
+						</div>
+					</div>
+					
 				</div>
 				
 				<div class="page">

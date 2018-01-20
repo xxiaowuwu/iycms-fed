@@ -25,6 +25,15 @@
 				</el-col>
 				<el-col :span="6">
 					
+					<div class="article-hot article-r">
+						<div class="title"><h1 class="l">热门文章</h1> <router-link class="r" to="/">>更多</router-link></div>
+						<div class="content">
+							<ul>
+								<li v-for="vo,i in 10"> <router-link to="/">我是文单1{{vo}}1111</router-link> <span class="r">{{i}}</span></li>
+							</ul>
+						</div>
+					</div>
+					
 					<div class="article-key article-r">
 						<div class="title"><h1 class="l">热门标签</h1> <router-link class="r" to="/">>更多</router-link></div>
 						<div class="content">
@@ -47,6 +56,8 @@
 						</div>
 					</div>
 					
+					
+					
 					<div class="article-hot article-r">
 						<div class="title"><h1 class="l">热门文章</h1> <router-link class="r" to="/">>更多</router-link></div>
 						<div class="content">
@@ -55,6 +66,8 @@
 							</ul>
 						</div>
 					</div>
+					
+					
 				</el-col>
 			</el-row>
 		</div>
