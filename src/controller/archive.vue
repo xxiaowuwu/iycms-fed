@@ -95,10 +95,3 @@
 		}
 	}
 </script>
-
-<style>
-	
-	@import "../../static/home/css/archive.css";
-	
-	
-</style>

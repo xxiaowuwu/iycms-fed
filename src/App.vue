@@ -16,9 +16,18 @@
 			return {
 				show: true,
 				header2: false,
-				nav: [{name:"关于我",url:"/about",an:false,list:[{name:"个人资料",url:"/article"},{name:"专业技能",url:"/article"},
-				{name:"项目经验",url:"/article"},{name:"工作经历",url:"/article"},]},{name:"留言",url:"/leave"},
-				{name:"实验室",url:"/experiment"},{name:"归档",url:"/archive"},{name:"博文",url:"/article"},{name:"首页",url:"/",active:true,}],
+				nav: [
+					{name:"更多",url:"/about",an:false,list:[
+						{name:"友情链接",url:"/info"},
+					]},
+					{name:"关于我",url:"/info"},
+					{name:"留言",url:"/leave"},					
+					{name:"作品",url:"/lea212"},
+					{name:"实验室",url:"/experiment"},
+					{name:"归档",url:"/archive"},
+					{name:"博文",url:"/article"},
+					{name:"首页",url:"/",active:true}
+				],
 				keys:[
 					{name:"php",show:false,yy:0,xx:0,opacity:1},
 					{name:"css",show:false,yy:0,xx:0,opacity:1},

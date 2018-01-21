@@ -5,6 +5,7 @@ import article from './controller/article'
 import archive from './controller/archive'
 import experiment from './controller/experiment'
 import leave from './controller/leave'
+import info from './controller/info'
 
 Vue.use(Router)
 
@@ -40,6 +41,10 @@ export default new Router({
 			path: "/leave",
 			name: "留言",
 			component: leave
+		},{
+			path: "/info",
+			name: "关于我",
+			component: info
 		}
 	]
 })
