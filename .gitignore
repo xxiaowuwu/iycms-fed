@@ -14,10 +14,10 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
-.project
-.postcssrc.js
-.editorconfig
 .babelrc
+.editorconfig
+.postcssrc.js
+.project
 *.log*
 
 package.json
