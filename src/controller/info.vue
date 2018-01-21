@@ -75,7 +75,6 @@
 						</el-row>
 					</div>
 					
-					
 					<div class="title mt20">
 						<h1>工作经验</h1>
 					</div>
