@@ -19,7 +19,6 @@
 								<i class="iconfont">&#xe68a;123</i>
 								<i class="iconfont">&#xe681;233</i>
 								<i class="iconfont">&#xe604;33</i>
-
 							</span></div>
 						</el-col>
 					</el-row>

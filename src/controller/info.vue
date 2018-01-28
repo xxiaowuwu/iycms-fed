@@ -84,9 +84,23 @@
 							<li v-for="vo in work">
 								<div class="date l">{{vo.date_start}}</div>
 								<div class="content l">
-									<h3>{{vo.department}}</h3>
-									<p>至{{vo.date_end}}</p>
+									<div>
+										<h3 class="l">{{vo.department}}</h3>
+										<span class="r">至{{vo.date_end}}</span>
+									</div>
+									<div>
+										<h4 class="l">某某部</h4>
+										<h4 class="l">程序员</h4>
+									</div>
+									<div class="workbody">
+										<h4>工作内容</h4>
+										<p>你胸肷有欠有欠妥仍欠妥欠有欠妥欠妥我仍欠妥欠有欠妥欠有欠妥
+										qweqw e qwe qw eqwe
+										eqw e qwe qw e qwe qwe qwEw e we we 月月月月有关系  有关有有有有有关e</p>
+									</div>
+									
 								</div>
+								<p></p>
 							</li>
 						</ul>
 					</div>
@@ -174,6 +188,7 @@
 	}
 	.work{
 		margin-top: 30px;
+		    color: #666;
 	}
 	.work ul li{
 		width: 100%;
@@ -187,6 +202,7 @@
 		position: relative;
 		padding: 20px 30px;
 		border-left: solid 1px #ccc;
+		width: 760px;
 	}
 	.work ul li div.content:after{
 		content: "";
@@ -199,6 +215,25 @@
 	    border: solid 3px rgba(255,255,255,0.5);
 	    border-radius: 50%;
     	-moz-border-radius: 50%;
+	}
+	.work ul li div.content div{
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+	.work ul li div.content div h4 + h4{
+		border-left: solid 1px #ccc;
+		padding-left: 10px;
+		margin-left: 10px;
+	}
+	
+	.work ul li div.content .workbody{
+		margin-top: 20px;
+	}
+	
+	.work ul li div.content .workbody p{
+		font-size: 14px;
+		color: #999;
+		margin-top: 10px;
 	}
 	
 	

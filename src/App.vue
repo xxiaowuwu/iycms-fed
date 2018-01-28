@@ -1,6 +1,6 @@
 <template>
 	<div id="app" v-loading.fullscreen.lock="!show" @click="floating">
-		<Header :nav="nav" :header2="header2" @SetHeader="set_header2"  ></Header>
+		<Header :nav="nav" :header2="header2" @SetHeader="set_header2" @scrollTop="set_scrollTop" ></Header>
 		<router-view @SetHeader="set_header2" ></router-view>
 		<Footer></Footer>
 		<div :class="{'maskl':true,'maskl2':show}"></div>
@@ -8,6 +8,9 @@
 		<div class="floatig">
 			<font v-for="vo in keys" v-show="vo.show" :style="{top:vo.yy+'px',left:vo.xx+'px',opacity:vo.opacity}">{{vo.name}}</font>
 		</div>
+		<transition name="el-fade-in-linear">
+		<div v-show="top" @click="returntop" class="top"><i class="iconfont">&#xe610;</i></div>
+		</transition>
 	</div>
 </template> 
 <script>
@@ -16,13 +19,14 @@
 			return {
 				show: true,
 				header2: false,
+				top: false,
 				nav: [
 					{name:"更多",url:"/about",an:false,list:[
 						{name:"友情链接",url:"/info"},
 					]},
 					{name:"关于我",url:"/info"},
 					{name:"留言",url:"/leave"},					
-					{name:"作品",url:"/lea212"},
+					{name:"作品",url:"/works"},
 					{name:"实验室",url:"/experiment"},
 					{name:"归档",url:"/archive"},
 					{name:"博文",url:"/article"},
@@ -48,12 +52,18 @@
 			setTimeout(function(){
 				self.show = true;
 			},3000/1000)
-		
 		},
 		methods: {
 			//导航状态
 			set_header2:function(e){
 				this.header2 = e;
+			},
+			set_scrollTop:function(e){
+				if(e>300){
+					this.top = true;
+				}else{
+					this.top = false;
+				}
 			},
 			floating : function(e){
 				if(e.target.nodeName=="A" || e.target.nodeName=="I"){
@@ -75,6 +85,14 @@
 				},1000)
 				
 				self.i = (self.i==self.keys.length-1) ? 0 : ++self.i;
+			},
+			returntop:function(){
+				var top = setInterval(function(){
+					document.body.scrollTop-=50
+					if(document.body.scrollTop<=0){
+						clearInterval(top)
+					}
+				},1)
 			}
 		},
 		
@@ -128,7 +146,35 @@
 		right: -50%;
 	}
 	
-	
-	
+	.top{
+		cursor:pointer;
+		position: fixed;
+		width: 50px;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		bottom: 50px;
+		left: 50%;
+		margin-left: 600px;
+		background-color: rgba(255,255,255,0.5);
+		transition:all 2s;
+		-moz-transition:all 2s;
+		-webkit-transition:all 2s;
+		-o-transition:all 2s;
+	}
+	.top i{
+		font-size: 24px;
+		color: #CCC;
+		transition:all 2s;
+		-moz-transition:all 2s;
+		-webkit-transition:all 2s;
+		-o-transition:all 2s;
+	}
+	.top:hover i{
+		color: #009688;		
+	}
+	.top:hover{
+		background-color: rgba(255,255,255,1);
+	}
 	
 </style>

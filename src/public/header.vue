@@ -47,6 +47,7 @@
 				this.nav[i].an = !this.nav[i].an;
 			},
 			handleScroll:function(){
+				this.$emit("scrollTop",document.body.scrollTop);
 				if(this.$route.path=="/"){
 					if(document.body.scrollTop>640){
 						this.$emit("SetHeader",true);

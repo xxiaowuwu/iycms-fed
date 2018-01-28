@@ -6,6 +6,7 @@ import archive from './controller/archive'
 import experiment from './controller/experiment'
 import leave from './controller/leave'
 import info from './controller/info'
+import works from './controller/works'
 
 Vue.use(Router)
 
@@ -41,7 +42,13 @@ export default new Router({
 			path: "/leave",
 			name: "留言",
 			component: leave
-		},{
+		},
+		{
+			path: "/works",
+			name: "作品",
+			component: works
+		},
+		{
 			path: "/info",
 			name: "关于我",
 			component: info
