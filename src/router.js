@@ -7,6 +7,7 @@ import experiment from './controller/experiment'
 import leave from './controller/leave'
 import info from './controller/info'
 import works from './controller/works'
+import content from './controller/content'
 
 Vue.use(Router)
 
@@ -52,6 +53,11 @@ export default new Router({
 			path: "/info",
 			name: "关于我",
 			component: info
+		},
+		{
+			path: "/content/:id",
+			name: '文章内容',
+			component: content
 		}
 	]
 })
