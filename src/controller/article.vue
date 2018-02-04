@@ -1,11 +1,14 @@
 <template>
 	<el-container>
-		<div class="container">
+		<div class="container" 
+			v-loading="!show" 
+			element-loading-text="数据加载中..."
+			element-loading-background="rgba(255, 255, 255, 0.5)">
 			<el-row :gutter="20">
 				<!--文章盒子-->
-				<el-col :span="18" class="article-list">
+				<el-col :span="18" class="article-list"  >
 					<!--文章列表-->
-					<el-row v-for="i in 5" class="li">
+					<el-row v-for="i in list" class="li">
 						<el-col :span="6">
 							<img src="/static/home/img/article-li.jpg" />
 						</el-col>
@@ -62,7 +65,6 @@
 							<router-link to="/"><el-tag type="warning">四</el-tag></router-link>
 							<router-link to="/"><el-tag type="danger">标签五人</el-tag></router-link>
 
-
 						</div>
 					</div>
 
@@ -87,6 +89,7 @@
 	export default {
 		data() {
 			return {
+				show:false,
 				type:[
 					{name:"全部文章",url:"/article",an:true},
 					{name:"后端",url:"/article/t/1",an:false,list:[
@@ -100,11 +103,28 @@
 						{name:"jquery",url:"/article/t/8",an:false},
 					]},
 					{name:"linux",url:"/article/t/9",an:false},
-				]
+				],
+				list:[]
 			}
 		},
 		created() {
+			var self = this;
 			this.$emit("SetHeader", true);
+			if (sessionStorage.article){
+			    self.show = true;
+				self.list = JSON.parse(sessionStorage.article);
+				console.log(self.list)
+			}else{
+				this.$emit("gets",{url:'/api/article.html',success:function(e){
+					if(e.status==200){
+						self.show = true;
+						self.list = e.data;
+						sessionStorage.article = JSON.stringify(e.data);
+					}
+				},error:function(e){
+					 self.$message.error('I\'m sorry 请求错误!');
+				}});
+			}
 		},
 		methods: {
 			 handleSizeChange(val) {

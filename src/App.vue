@@ -1,25 +1,42 @@
 <template>
-	<div id="app" v-loading.fullscreen.lock="!show" @click="floating">
-		<Header :nav="nav" :header2="header2" @SetHeader="set_header2" @scrollTop="set_scrollTop" ></Header>
-		<router-view @SetHeader="set_header2" ></router-view>
-		<Footer></Footer>
+	<div id="app" 
+		v-loading.fullscreen.lock="!show"
+		element-loading-text="数据加载中..."
+		element-loading-background="rgba(0, 0, 0, 0.8)"
+		@click="floating">
+		<!--头部-->
+		<IycmsHeader :nav="nav" :ShowHeader="ShowHeader" @SetHeader="set_header" @scrollTop="set_scrollTop" ></IycmsHeader>
+		<!--主体~路由-->
+		<router-view :init="init" @SetHeader="set_header" @gets="gets" ></router-view>
+		<!--尾部-->
+		<IycmsFooter :init="init"></IycmsFooter>
+		
+			
+		<!--开门效果-->
 		<div :class="{'maskl':true,'maskl2':show}"></div>
 		<div :class="{'maskr':true,'maskr2':show}"></div>
+		
+		<!--点击特效-->
 		<div class="floatig">
-			<font v-for="vo in keys" v-show="vo.show" :style="{top:vo.yy+'px',left:vo.xx+'px',opacity:vo.opacity}">{{vo.name}}</font>
+			<font v-for="vo in keys.list" v-show="vo.show" :style="{top:vo.yy+'px',left:vo.xx+'px',opacity:vo.opacity}">{{vo.name}}</font>
 		</div>
+		
+		<!--返回顶部-->
 		<transition name="el-fade-in-linear">
-		<div v-show="top" @click="returntop" class="top"><i class="iconfont">&#xe610;</i></div>
+			<div v-show="top" @click="returntop" class="top"><i class="iconfont">&#xe610;</i></div>
 		</transition>
+		
 	</div>
 </template> 
 <script>
 	export default {
 		data() {
 			return {
-				show: true,
-				header2: false,
-				top: false,
+				host: "http://127.0.0.14", //api接口
+				show: false, //显示页面
+				ShowHeader: false, //导航切换
+				top: false, //返回顶部
+				init:{},
 				nav: [
 					{name:"更多",url:"/about",an:false,list:[
 						{name:"友情链接",url:"/info"},
@@ -32,32 +49,44 @@
 					{name:"博文",url:"/article"},
 					{name:"首页",url:"/",active:true}
 				],
-				keys:[
-					{name:"php",show:false,yy:0,xx:0,opacity:1},
-					{name:"css",show:false,yy:0,xx:0,opacity:1},
-					{name:"python",show:false,yy:0,xx:0,opacity:1},
-					{name:"java",show:false,yy:0,xx:0,opacity:1},
-					{name:"mysql",show:false,yy:0,xx:0,opacity:1},
-					{name:"php",show:false,yy:0,xx:0,opacity:1},
-				],
-				i:0
+				keys:{
+					list:[
+						{name:"php",show:false,yy:0,xx:0,opacity:1},
+						{name:"css",show:false,yy:0,xx:0,opacity:1},
+						{name:"python",show:false,yy:0,xx:0,opacity:1},
+						{name:"java",show:false,yy:0,xx:0,opacity:1},
+						{name:"mysql",show:false,yy:0,xx:0,opacity:1},
+						{name:"php",show:false,yy:0,xx:0,opacity:1},
+					],
+					i:0
+				}
 			};
-		},
-		
-		created: function(){
-			
 		},
 		mounted: function(){
 			var self = this;
-			setTimeout(function(){
-				self.show = true;
-			},3000/1000)
+			
+			if(typeof(Storage)!=="undefined"){
+			    console.log(1)
+			} else {
+			    console.log(0)
+			}
+
+			//加载初始数据
+			this.gets({url:'/api.html',success:function(e){
+				if(e.status==200){
+					self.show = true;
+					self.init = e.data;
+				}
+			},error:function(e){
+				 self.$message.error('I\'m sorry 请求错误!');
+			}});
 		},
 		methods: {
 			//导航状态
-			set_header2:function(e){
-				this.header2 = e;
+			set_header:function(e){
+				this.ShowHeader = e;
 			},
+			//显示返回顶部
 			set_scrollTop:function(e){
 				if(e>300){
 					this.top = true;
@@ -65,34 +94,41 @@
 					this.top = false;
 				}
 			},
+			//点击特效
 			floating : function(e){
+				//排除某些元素
 				if(e.target.nodeName=="A" || e.target.nodeName=="I"){
 					return false;
 				}
 				var self = this;
-				var n = self.i
-				self.keys[n].yy = e.clientY;
-				self.keys[n].xx = e.clientX;
-				self.keys[n].show = true;
-				self.keys[n].opacity = 1;
+				var n = self.keys.i;
+				self.keys.list[n].yy = e.clientY;
+				self.keys.list[n].xx = e.clientX;
+				self.keys.list[n].show = true;
+				self.keys.list[n].opacity = 1;
 				setTimeout(function(){
-					self.keys[n].opacity = 0.3;
-					self.keys[n].yy = e.clientY-20;
+					self.keys.list[n].opacity = 0.1;
+					self.keys.list[n].yy = e.clientY-50;
 				},10)
 				
 				setTimeout(function(){
-					self.keys[n].show = false;
+					self.keys.list[n].show = false;
 				},1000)
 				
-				self.i = (self.i==self.keys.length-1) ? 0 : ++self.i;
+				self.keys.i = (self.keys.i==self.keys.list.length-1) ? 0 : ++self.keys.i;
 			},
+			//返回顶部
 			returntop:function(){
 				var top = setInterval(function(){
-					document.body.scrollTop-=50
+					document.body.scrollTop-=10;
 					if(document.body.scrollTop<=0){
 						clearInterval(top)
 					}
 				},1)
+			},
+			//封装ajax get请求
+			gets:function({url,success,error}){
+				this.$http.get(this.host+url).then(success).catch(error);
 			}
 		},
 		
@@ -123,7 +159,7 @@
 		position: fixed;
 		width: 50%;
 		height: 100%;
-		background-color: #FFF;
+		background-color: rgba(0,0,0,0.8);
 		top: 0;
 		z-index: 101;
 		transition:all 2s;

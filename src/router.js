@@ -13,13 +13,11 @@ Vue.use(Router)
 
 export default new Router({
 	mode: 'history', //隐藏#号
-	routes: [
-		{
+	routes: [{
 			path: '/',
 			name: '首页',
 			component: index
-		},
-		{
+		}, {
 			path: '/article',
 			name: '文章',
 			component: article
@@ -29,32 +27,29 @@ export default new Router({
 			component: article
 		}, {
 			path: '/article/id/:id',
-			name: '文章内容',
+			name: '文章列表',
 			component: article
 		}, {
 			path: "/archive",
 			name: "归档",
 			component: archive
-		},{
+		}, {
 			path: "/experiment",
 			name: "实验室",
 			component: experiment
-		},{
+		}, {
 			path: "/leave",
 			name: "留言",
 			component: leave
-		},
-		{
+		}, {
 			path: "/works",
 			name: "作品",
 			component: works
-		},
-		{
+		}, {
 			path: "/info",
 			name: "关于我",
 			component: info
-		},
-		{
+		},{
 			path: "/content/:id",
 			name: '文章内容',
 			component: content

@@ -3,14 +3,13 @@
 		<!--fixed-->
 		<div class="background-fixed">
 			<div class="blog-container">
-				<h1 class="blog-name">あ读鈊茚ケ</h1>
-				<p class="blog-description">探索计算机的奥秘是我们的乐趣,也是我们奋不顾身的理由<br />
-我们是开发者,我们是程序员,一群与众不同的人!</p>
+				<h1 class="blog-name">{{init.info.nick || init.info.name}}</h1>
+				<p class="blog-description" v-html="init.info.desc"> </p>
 				<div class="index-btns">
-					<a target="_blank" href="https://github.com/S-mohan" class="index-btns-btn">
-						<i class="mo-icon-github"></i> GitHub
+					<a target="_blank" :href="init.info.github" class="index-btns-btn">
+						<i class="iconfont">&#xeee2;</i> GitHub
 					</a>
-					<a href="kkk" class="index-btns-btn">进入博客</a>
+					<router-link to="/article" class="index-btns-btn">进入博客</router-link>
 				</div>
 			</div>
 		</div>
@@ -63,14 +62,14 @@
 		<!--关于我-->
 		<div class="container-flink">
 			<h1>友情链接</h1>
-			<div><a>你发阴影</a><a>你发阴影</a><a>你发阴影</a><a>你发阴影</a><a>你发阴影</a> <a>+申请友情</a></div>
+			<div><a v-for="vo in init.flink" :href="vo.url" target="_blank">{{vo.name}}</a></div>
 		</div>
 	</div>
 </template>
 
 <script>
 	export default {
-		name: 'index',
+		props: ['init'],
 		data() {
 			return {
 			}
