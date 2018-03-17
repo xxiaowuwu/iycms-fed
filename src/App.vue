@@ -1,5 +1,5 @@
 <template>
-	<div id="app" 
+	<div id="app"
 		v-loading.fullscreen.lock="!show"
 		element-loading-text="数据加载中..."
 		element-loading-background="rgba(0, 0, 0, 0.8)"
@@ -10,29 +10,29 @@
 		<router-view :init="init" @SetHeader="set_header" @gets="gets" ></router-view>
 		<!--尾部-->
 		<IycmsFooter :init="init"></IycmsFooter>
-		
-			
+
+
 		<!--开门效果-->
 		<div :class="{'maskl':true,'maskl2':show}"></div>
 		<div :class="{'maskr':true,'maskr2':show}"></div>
-		
+
 		<!--点击特效-->
 		<div class="floatig">
 			<font v-for="vo in keys.list" v-show="vo.show" :style="{top:vo.yy+'px',left:vo.xx+'px',opacity:vo.opacity}">{{vo.name}}</font>
 		</div>
-		
+
 		<!--返回顶部-->
 		<transition name="el-fade-in-linear">
 			<div v-show="top" @click="returntop" class="top"><i class="iconfont">&#xe610;</i></div>
 		</transition>
-		
+
 	</div>
-</template> 
+</template>
 <script>
 	export default {
 		data() {
 			return {
-				host: "http://127.0.0.14", //api接口
+				host: "http://www.blog.com", //api接口
 				show: false, //显示页面
 				ShowHeader: false, //导航切换
 				top: false, //返回顶部
@@ -42,7 +42,7 @@
 						{name:"友情链接",url:"/info"},
 					]},
 					{name:"关于我",url:"/info"},
-					{name:"留言",url:"/leave"},					
+					{name:"留言",url:"/leave"},
 					{name:"作品",url:"/works"},
 					{name:"实验室",url:"/experiment"},
 					{name:"归档",url:"/archive"},
@@ -64,22 +64,23 @@
 		},
 		mounted: function(){
 			var self = this;
-			
-			if(typeof(Storage)!=="undefined"){
-			    console.log(1)
-			} else {
-			    console.log(0)
-			}
-
-			//加载初始数据
-			this.gets({url:'/api.html',success:function(e){
-				if(e.status==200){
-					self.show = true;
-					self.init = e.data;
-				}
-			},error:function(e){
-				 self.$message.error('I\'m sorry 请求错误!');
-			}});
+			// if(sessionStorage.init){
+			// 	self.show = true;
+			// 	self.init = sessionStorage.init;
+			// }else{
+				//加载初始数据
+				this.gets({url:'/api.html',success:function(e){
+					if(e.status==200){
+						self.show = true;
+						self.init = e.data;
+						sessionStorage.init = JSON.stringify(e.data);
+					}else{
+						self.$message.error('I\'m sorry 请求错误!');
+					}
+				},error:function(e){
+					self.$message.error('I\'m sorry 请求错误!');
+				}});
+			// }
 		},
 		methods: {
 			//导航状态
@@ -110,11 +111,11 @@
 					self.keys.list[n].opacity = 0.1;
 					self.keys.list[n].yy = e.clientY-50;
 				},10)
-				
+
 				setTimeout(function(){
 					self.keys.list[n].show = false;
 				},1000)
-				
+
 				self.keys.i = (self.keys.i==self.keys.list.length-1) ? 0 : ++self.keys.i;
 			},
 			//返回顶部
@@ -131,8 +132,8 @@
 				this.$http.get(this.host+url).then(success).catch(error);
 			}
 		},
-		
-		
+
+
 	}
 </script>
 
@@ -177,11 +178,11 @@
 	.maskl2{
 		left: -50%;
 	}
-	
+
 	.maskr2{
 		right: -50%;
 	}
-	
+
 	.top{
 		cursor:pointer;
 		position: fixed;
@@ -207,10 +208,10 @@
 		-o-transition:all 2s;
 	}
 	.top:hover i{
-		color: #009688;		
+		color: #009688;
 	}
 	.top:hover{
 		background-color: rgba(255,255,255,1);
 	}
-	
+
 </style>

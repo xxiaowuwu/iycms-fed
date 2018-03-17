@@ -18,16 +18,12 @@ export default new Router({
 			name: '首页',
 			component: index
 		}, {
-			path: '/article',
-			name: '文章',
-			component: article
-		}, {
 			path: '/article/t/:t',
 			name: '文章+分类',
 			component: article
 		}, {
-			path: '/article/id/:id',
-			name: '文章列表',
+			path: '/article',
+			name: '文章',
 			component: article
 		}, {
 			path: "/archive",

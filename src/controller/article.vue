@@ -1,34 +1,34 @@
 <template>
-	<el-container>
-		<div class="container" 
-			v-loading="!show" 
+	<el-container >
+		<div class="container"  v-loading="!show" 
 			element-loading-text="数据加载中..."
-			element-loading-background="rgba(255, 255, 255, 0.5)">
+			element-loading-background="rgba(255, 255, 255, 0.5)"
+			 v-loading.fullscreen.lock="!show2"
+			 >
 			<el-row :gutter="20">
 				<!--文章盒子-->
 				<el-col :span="18" class="article-list"  >
 					<!--文章列表-->
-					<el-row v-for="i in list" class="li">
+					<el-row v-for="vo in list" class="li">
 						<el-col :span="6">
-							<img src="/static/home/img/article-li.jpg" />
+							<img :src="vo.pic" />
 						</el-col>
 						<el-col :span="18">
-							<router-link to="/content/3"><h1>请问做个网站多少站多少站多少多少钱？</h1></router-link>
-							<p>推出模板建站系统，用户可通过网站直接自助下单，实现自助建站，模板建站主要针对网站建设小需求客户，最大的优点就是价格低、速度快，如果选用海外空间，可以立刻上线网站。缺点当然是可能会撞脸。下面方维网络把客户常见的问题以及答案整理如建站系统，用户可通过网站直接自助下单，实现自助建站，模板建站主要针对网站建设小需求客户，最大当然是可能会撞脸。下面方维网络把客户常见的问题以及答案整理如建站系统，用户可通过网站直接自助下单，实现自助建站，模板建站主要针对网站建设小需求客户，最大的优点就是价格低、速度快，如果选用海外空间，可以立刻上线网站。缺点当然是可能会撞脸。下面方维网络把客户常见的问题以及答案整理如下： 1、建站版本基础版、标准...
-							</p>
-							<div class="article-info"><a href="">某某分类</a> 2018-01-15 15:55:33
+							<router-link :to="'/content/'+vo.id"><h1 v-text="vo.title"></h1></router-link>
+							<p v-text="vo.desc"></p>
+							<div class="article-info"><router-link :to="'/article/t/'+vo.type" v-text="vo.typename"></router-link> <span v-text="vo.time"></span>
 
 							<span class="r">
-								<i class="iconfont">&#xe68a;123</i>
-								<i class="iconfont">&#xe681;233</i>
-								<i class="iconfont">&#xe604;33</i>
+								<i class="iconfont" v-html="'&#xe68a;'+vo.a"></i>
+								<i class="iconfont" v-html="'&#xe681;'+vo.z"></i>
+								<i class="iconfont" v-html="'&#xe604;'+vo.p"></i>
 							</span></div>
 						</el-col>
 					</el-row>
 
-					<div class="page">
-						<el-pagination background :page-size="30"   @size-change="handleSizeChange"
-			@current-change="handleCurrentChange" layout="prev, pager, next"  :total="100"> </el-pagination>
+					<div class="page" v-show="show">
+						<el-pagination background :page-size="page.size" 
+			@current-change="handleCurrentChange" layout="prev, pager, next"  :total="page.count"> </el-pagination>
 					</div>
 
 				</el-col>
@@ -42,13 +42,13 @@
 									</li>
 								</ul>
 							</li>
-
 						</ul>
 					</div>
 
 					<div class="article-key article-r">
 						<div class="title"><h1 class="l">热门标签</h1> <router-link class="r" to="/">>更多</router-link></div>
 						<div class="content">
+							{{$route.params.t}}
 							<router-link to="/"><el-tag>标签一</el-tag></router-link>
 							<router-link to="/"><el-tag type="success">标签</el-tag></router-link>
 							<router-link to="/"><el-tag type="info">标签三有</el-tag></router-link>
@@ -64,7 +64,6 @@
 							<router-link to="/"><el-tag type="info">标签三有</el-tag></router-link>
 							<router-link to="/"><el-tag type="warning">四</el-tag></router-link>
 							<router-link to="/"><el-tag type="danger">标签五人</el-tag></router-link>
-
 						</div>
 					</div>
 
@@ -90,6 +89,7 @@
 		data() {
 			return {
 				show:false,
+				show2:true,
 				type:[
 					{name:"全部文章",url:"/article",an:true},
 					{name:"后端",url:"/article/t/1",an:false,list:[
@@ -104,35 +104,58 @@
 					]},
 					{name:"linux",url:"/article/t/9",an:false},
 				],
-				list:[]
+				list:[],
+				page:{
+					count:0,
+					size:10
+				}
 			}
 		},
-		created() {
+		created: function(){
+			console.log(111);
+			console.log(this.$route)
 			var self = this;
 			this.$emit("SetHeader", true);
 			if (sessionStorage.article){
-			    self.show = true;
-				self.list = JSON.parse(sessionStorage.article);
-				console.log(self.list)
+				var data  = JSON.parse(sessionStorage.article);
+				self.show = true;
+				self.list = data.data;
+				self.page.count = data.count;
 			}else{
 				this.$emit("gets",{url:'/api/article.html',success:function(e){
 					if(e.status==200){
 						self.show = true;
-						self.list = e.data;
+						self.list = e.data.data;
+						self.page.count = e.data.count;
 						sessionStorage.article = JSON.stringify(e.data);
 					}
 				},error:function(e){
-					 self.$message.error('I\'m sorry 请求错误!');
+					self.$message.error('I\'m sorry 请求错误!');
 				}});
 			}
 		},
 		methods: {
-			 handleSizeChange(val) {
-						console.log(`每页 ${val} 条`);
-					},
-					handleCurrentChange(val) {
-						console.log(`当前页: ${val}`);
-					}
+			handleCurrentChange(p) { //切换页面
+				var self = this;
+				self.show2 = false;
+				if (sessionStorage['article'+p]){
+					var data  = JSON.parse(sessionStorage['article'+p]);
+					self.show2 = true;
+					self.list = data.data;
+					self.page.count = data.count;
+				}else{
+					this.$emit("gets",{url:'/api/article.html?p='+p,success:function(e){
+						if(e.status==200){
+							self.show2 = true;
+							self.list = e.data.data;
+							self.page.count = e.data.count;
+							sessionStorage['article'+p] = JSON.stringify(e.data);
+						}
+					},error:function(e){
+						self.$message.error('I\'m sorry 请求错误!');
+					}});
+				}
+			}
 		}
 	}
 </script>
