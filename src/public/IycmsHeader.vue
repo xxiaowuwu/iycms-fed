@@ -48,9 +48,10 @@
 			},
 			//获取高度并且交给返回顶部与导航切换
 			handleScroll:function(){
-				this.$emit("scrollTop",document.body.scrollTop);
+				var Top = document.body.scrollTop || document.documentElement.scrollTop;
+				this.$emit("scrollTop",Top);
 				if(this.$route.path=="/"){
-					if(document.body.scrollTop>640){
+					if(Top>640){
 						this.$emit("SetHeader",true);
 					}else{
 						this.$emit("SetHeader",false);
@@ -110,7 +111,7 @@
 	
 	.el-header ul li.active>a,
 	.el-header ul li>a:hover {
-		border-bottom: #009688 solid 2px;
+		border-bottom: var(--color) solid 2px;
 	}
 	
 	.el-header ul li a {

@@ -2,15 +2,16 @@
 	<div id="app"
 		v-loading.fullscreen.lock="!show"
 		element-loading-text="数据加载中..."
-		element-loading-background="rgba(0, 0, 0, 0.8)"
+		element-loading-background="rgba(0, 0, 0, 0.5)"
 		@click="floating">
 		<!--头部-->
-		<IycmsHeader :nav="nav" :ShowHeader="ShowHeader" @SetHeader="set_header" @scrollTop="set_scrollTop" ></IycmsHeader>
+		<IycmsHeader v-if="show" :nav="nav" :ShowHeader="ShowHeader" @SetHeader="set_header"  @scrollTop="set_scrollTop" ></IycmsHeader>
 		<!--主体~路由-->
-		<router-view :init="init" @SetHeader="set_header" @gets="gets" ></router-view>
+		<transition name="el-fade-in"> <!-- 动画效果 -->
+			<router-view v-if="show" :init="init" @SetHeader="set_header"  @SetScrollTop="returnTop" @gets="gets" ></router-view>
+		</transition>
 		<!--尾部-->
-		<IycmsFooter :init="init"></IycmsFooter>
-
+		<IycmsFooter v-if="show" :init="init"></IycmsFooter>
 
 		<!--开门效果-->
 		<div :class="{'maskl':true,'maskl2':show}"></div>
@@ -23,7 +24,7 @@
 
 		<!--返回顶部-->
 		<transition name="el-fade-in-linear">
-			<div v-show="top" @click="returntop" class="top"><i class="iconfont">&#xe610;</i></div>
+			<div v-show="top" @click="returnTop" class="top"><i class="iconfont">&#xe610;</i></div>
 		</transition>
 
 	</div>
@@ -38,14 +39,14 @@
 				top: false, //返回顶部
 				init:{},
 				nav: [
-					{name:"更多",url:"/about",an:false,list:[
-						{name:"友情链接",url:"/info"},
-					]},
+					// {name:"更多",url:"/about",an:false,list:[
+					// 	{name:"友情链接",url:"/info"},
+					// ]},
 					{name:"关于我",url:"/info"},
 					{name:"留言",url:"/leave"},
-					{name:"作品",url:"/works"},
+					// {name:"作品",url:"/works"},
 					{name:"实验室",url:"/experiment"},
-					{name:"归档",url:"/archive"},
+					// {name:"归档",url:"/archive"},
 					{name:"博文",url:"/article"},
 					{name:"首页",url:"/",active:true}
 				],
@@ -62,12 +63,13 @@
 				}
 			};
 		},
-		mounted: function(){
+		created: function(){
 			var self = this;
-			// if(sessionStorage.init){
-			// 	self.show = true;
-			// 	self.init = sessionStorage.init;
-			// }else{
+			
+			if(sessionStorage.init){
+				self.show = true;
+				self.init = JSON.parse(sessionStorage.init);
+			}else{
 				//加载初始数据
 				this.gets({url:'/api.html',success:function(e){
 					if(e.status==200){
@@ -75,12 +77,12 @@
 						self.init = e.data;
 						sessionStorage.init = JSON.stringify(e.data);
 					}else{
-						self.$message.error('I\'m sorry 请求错误!');
+						self.$message.error('服务器异常');
 					}
 				},error:function(e){
-					self.$message.error('I\'m sorry 请求错误!');
+					self.$message.error('服务器异常');
 				}});
-			// }
+			}
 		},
 		methods: {
 			//导航状态
@@ -119,11 +121,18 @@
 				self.keys.i = (self.keys.i==self.keys.list.length-1) ? 0 : ++self.keys.i;
 			},
 			//返回顶部
-			returntop:function(){
+			returnTop:function(){
 				var top = setInterval(function(){
-					document.body.scrollTop-=10;
-					if(document.body.scrollTop<=0){
-						clearInterval(top)
+					if(document.body.scrollTop){
+						document.body.scrollTop-=10;
+						if(document.body.scrollTop<=0){
+							clearInterval(top)
+						}
+					}else{
+						document.documentElement.scrollTop-=10;
+						if(document.documentElement.scrollTop<=0){
+							clearInterval(top)
+						}
 					}
 				},1)
 			},
@@ -138,12 +147,13 @@
 </script>
 
 <style>
+
 	.floatig font{
 		position: fixed;
 		left: 0;
 		top: 0;
 		cursor:default;
-		color: #009688;
+		color: var(--color);
 		-webkit-touch-callout: none; /* iOS Safari */
 		-webkit-user-select: none; /* Chrome/Safari/Opera */
 		-khtml-user-select: none; /* Konqueror */
@@ -208,7 +218,7 @@
 		-o-transition:all 2s;
 	}
 	.top:hover i{
-		color: #009688;
+		color: var(--color);
 	}
 	.top:hover{
 		background-color: rgba(255,255,255,1);

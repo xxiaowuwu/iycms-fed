@@ -85,6 +85,7 @@
 		},
 		created() {
 			this.$emit("SetHeader", true);
+			this.$emit("SetScrollTop");
 		},
 		methods: {
 			handleSizeChange(val) {

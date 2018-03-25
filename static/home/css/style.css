@@ -21,6 +21,11 @@
 	margin-right: 5px;
 }
 
+/*定义一键换换色*/
+:root{
+	--color:#009688;
+	/* --color:#f60; */
+}
 
 /*element-ui 补充*/
 
@@ -29,11 +34,11 @@
 }
 
 .el-pagination.is-background .el-pager li.active {
-	background-color: #009688;
+	background-color: var(--color);
 }
 
 .el-pagination.is-background .el-pager li:hover {
-	color: #009688;
+	color: var(--color);
 }
 
 .el-textarea__inner {
@@ -41,11 +46,11 @@
 }
 
 .el-textarea__inner:focus {
-	border-color: #009688;
+	border-color: var(--color);
 }
 
 .el-progress-bar__inner {
-	background-color: #009688;
+	background-color: var(--color);
 }
 
 
@@ -64,13 +69,28 @@
 }
 
 a {
-	color: #009688;
+	color: var(--color);
 	text-decoration: none;
 }
 
 a:hover {
 	color: #333333;
 	text-decoration: none;
+}
+/* 选中后颜色 */
+::selection {
+    background:var(--color); 
+    color:#fff;
+}
+
+::-moz-selection {
+    background:var(--color); 
+    color:#fff;
+}
+
+::-webkit-selection {
+    background:var(--color); 
+    color:#fff;
 }
 
 ul,
@@ -153,7 +173,7 @@ span {
 ::-webkit-scrollbar-thumb {
     background: #999;
 }
-::-webkit-scrollbar-thumb:window-inactive { background: #009688;}
+::-webkit-scrollbar-thumb:window-inactive { background: var(--color);}
 
 
 
@@ -248,8 +268,8 @@ div.title a {
 
 .blog-container .index-btns a:first-child {
 	margin-right: 20px;
-	background-color: #009688;
-	border-color: #009688;
+	background-color: var(--color);
+	border-color: var(--color);
 }
 
 .blog-container .index-btns a:hover {
@@ -496,7 +516,7 @@ div.title a {
 .article-type ul li a:hover,
 .article-type ul li a.active {
 	background-color: rgba(200, 200, 200, 0.3);
-	border-left: solid 2px #009688;
+	border-left: solid 2px var(--color);
 	color: #333333;
 }
 
@@ -584,7 +604,7 @@ div.title a {
 	width: 20px;
 	height: 20px;
 	display: block;
-	border: solid 2px #009688;
+	border: solid 2px var(--color);
 	background-color: rgba(255, 255, 255, 0.5);
 	float: right;
 	border-radius: 50%;
@@ -608,7 +628,7 @@ div.title a {
 	width: 10px;
 	height: 10px;
 	display: block;
-	background-color: #009688;
+	background-color: var(--color);
 	float: right;
 	border-radius: 50%;
 	-moz-border-radius: 50%;
@@ -634,7 +654,7 @@ div.title a {
 }
 
 .leave .tools i:hover {
-	color: #009688;
+	color: var(--color);
 	cursor: pointer;
 }
 
@@ -803,7 +823,7 @@ div.title a {
 	content: "";
 	width: 15px;
 	height: 15px;
-	background-color: #009688;
+	background-color: var(--color);
 	position: absolute;
 	top: 25px;
 	left: -8px;

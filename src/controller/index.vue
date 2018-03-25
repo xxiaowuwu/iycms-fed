@@ -3,7 +3,7 @@
 		<!--fixed-->
 		<div class="background-fixed">
 			<div class="blog-container">
-				<h1 class="blog-name">{{init.info.nick || init.info.name}}</h1>
+				<h1 class="blog-name">{{init.info.nick || init.info.name}}<p style="font-size: 16px; color:#666">WEB全栈开发工程师</p></h1>
 				<p class="blog-description" v-html="init.info.desc"> </p>
 				<div class="index-btns">
 					<a target="_blank" :href="init.info.github" class="index-btns-btn">
@@ -16,7 +16,7 @@
 		
 		<!--使用技术-->
 		<div class="container-body">
-			<h1>ThinkPHP5 && Vue 2</h1>
+			<h1>ThinkPHP 5 && Vue 2</h1>
 			<p class="description">博客尝试使用以下技术框架构建</p>
 			<div class="technology">
 				<div class="core">
@@ -76,8 +76,7 @@
 		},
 		created(){
 			this.$emit("SetHeader",false);
-		},
-	
-		
+			this.$emit("SetScrollTop");
+		}
 	}
 </script>

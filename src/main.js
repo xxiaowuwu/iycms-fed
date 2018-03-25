@@ -15,8 +15,11 @@ Vue.prototype.$http = axios
 
 Vue.component('IycmsHeader',IycmsHeader);
 Vue.component('IycmsFooter',IycmsFooter);
-new Vue({
+window.vue = new Vue({
   el: '#app',
+  data:{
+    abc:123
+  },
   router,
   template: '<App/>',
   components: { App }

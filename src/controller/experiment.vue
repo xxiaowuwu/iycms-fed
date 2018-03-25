@@ -1,19 +1,20 @@
 <template>
 	<el-container>
-		<div class="container">
+		<div class="container" v-loading.fullscreen.lock="!show" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.5)" >
 			<div class="experiment">
 				<ul>
-					<li v-for="vo in 10" style="" class="l">
-						<router-link to="/"><img src="/static/home/img/article-li.jpg" width="100%" />
-						<strong>这是标题这是标题这是标题这是标题这是标题</strong></router-link>
-						<p>这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述这是描述</p>
+					<li v-for="vo in list" style="" class="l">
+						<router-link :to="'/content/'+vo.id">
+							<img :src="vo.pic" width="100%" />
+							<strong>{{vo.title}}</strong>
+						</router-link>
+						<p>{{vo.desc}}</p>
 						<span>
-
-							<i class="iconfont l">2017-11-15</i>
-
-							<i class="iconfont r">&#xe68a;123</i>
-								<i class="iconfont r">&#xe681;233</i>
-								<i class="iconfont r">&#xe604;33</i></span>
+							<i class="iconfont l" v-text="vo.date"></i>
+							<i class="iconfont r" v-html="'&#xe68a;'+vo.a"></i>
+							<i class="iconfont r" v-html="'&#xe681;'+vo.z"></i>
+							<i class="iconfont r" v-html="'&#xe604;'+vo.p"></i>
+						</span>
 					</li>
 				</ul>
 			</div>
@@ -24,19 +25,33 @@
 	export default {
 		data() {
 			return {
-				currentDate: new Date()
+				show:false,
+				list:[],
 			}
 		},
 		created() {
 			this.$emit("SetHeader", true);
+			this.$emit("SetScrollTop");
+			var self = this;
+			var name = 'experiment';
+			if (sessionStorage[name]){
+				var data  = JSON.parse(sessionStorage[name]);
+				self.show = true;
+				self.list = data;
+			}else{
+				this.$emit("gets",{url:'/api/article/experiment.html',success:function(e){
+					if(e.status==200){
+						self.show = true;
+						self.list = e.data;
+						sessionStorage[name] = JSON.stringify(e.data);
+					}
+				},error:function(e){
+					self.$message.error('服务器异常');
+				}});
+			}
 		},
 		methods: {
-			handleSizeChange(val) {
-				console.log(`每页 ${val} 条`);
-			},
-			handleCurrentChange(val) {
-				console.log(`当前页: ${val}`);
-			}
+			
 		}
 	}
 </script>

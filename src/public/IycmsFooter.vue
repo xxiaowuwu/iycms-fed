@@ -15,7 +15,6 @@
 							<router-link to="/archive">归档</router-link>
 							<router-link to="/leave">留言</router-link>
 							<router-link to="/experiment">实验室</router-link>
-							
 						</p>
 					</el-col>
 					<el-col :span="4">
@@ -46,7 +45,6 @@
 <script>
 	export default {
 		props: ['init'],
-		data() {},
 		methods: {
 
 		},

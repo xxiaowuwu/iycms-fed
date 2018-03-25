@@ -1,52 +1,12 @@
 <template>
 	<el-container>
-		<div class="content">
+		<div class="content" v-loading.fullscreen.lock="!show" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.5)" >
 			<div class="content-head mb20">
-				<h1>1112123121123</h1>
+				<h1 v-text="article.title"></h1>
 			</div>
 			<div class="container background p20">
 			
-				  	<div class="body">
-				  		大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd大厦大厦大厦大厦
-				  		<br />大厦大厦dd
-				  		
-				  		
-				  		
-				  		
-				  	</div>
-				  	
+				  	<div class="body" v-html="article.body"></div>
 				  	
 				  	<div class="info">
 				  			<p>
@@ -99,15 +59,35 @@
 	export default {
 		data() {
 			return {
-				content: ""
+				show:false,
+				article:{},
+				content:''
 			}
 		},
-		created() {
+		created() {			
+			var id = this.$route.params.id;
 			this.$emit("SetHeader", true);
+			this.$emit("SetScrollTop");
+			var self = this;
+			var name = 'content_'+id;
+			if (sessionStorage[name]){
+				var data  = JSON.parse(sessionStorage[name]);
+				self.show = true;
+				self.article = data;
+			}else{
+				this.$emit("gets",{url:'/api/article/content.html?id='+id,success:function(e){
+					if(e.status==200){
+						self.show = true;
+						self.article = e.data;
+						sessionStorage[name] = JSON.stringify(e.data);
+					}
+				},error:function(e){
+					self.$message.error('服务器异常');
+				}});
+			}
 		},
 		methods: {
-		
-		setB: function(){
+			setB: function(){
 				this.content += "[b][/b]";
 			},
 			setURL: function(){
@@ -125,7 +105,6 @@
 			setCODE: function(){
 				this.content += "[code][/code]";
 			}
-		
 		}
 	}
 </script>
@@ -161,7 +140,7 @@
 		margin: 5px 0;
 	}
 	.content .container .info .warning{
-		border-left: solid 3px #009688;
+		border-left: solid 3px var(--color);
 		padding: 10px;
 		color: #666;
 		background-color: rgba(0,0,0,0.05);
@@ -184,7 +163,7 @@
 	}
 	
 	.content .container .comments .tools i:hover {
-		color: #009688;
+		color: var(--color);
 		cursor: pointer;
 	}
 	
@@ -205,7 +184,7 @@
 	}
 	.content-head:before{
 		content: "";
-		background: #009688 url(/static/home/img/article-li.jpg);
+		background: var(--color) url(/static/home/img/article-li.jpg);
 		background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
