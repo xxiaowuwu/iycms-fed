@@ -15,46 +15,46 @@
 					</div>
 					
 					<div class="text mt10 item">
-						网名: {{init.info.nick}}
+						网名: <span>{{init.info.nick}}</span>
 					</div>
 					
 					<div class="text  item">
-						姓名: {{init.info.name}}
+						姓名: <span>{{init.info.name}}</span>
 					</div>
 					
 					<div class="text  item">
-						性别: {{init.info.sex}}
+						性别: <span>{{init.info.sex}}</span>
 					</div>
 					<div class="text item">
-						生日: {{init.info.birthday}} ({{init.info.calendar}})
+						生日: <span>{{init.info.birthday}} ({{init.info.calendar}})</span>
 					</div>
 					
 					<div class="text item">
-						年龄: {{init.info.name}}
+						年龄: <span>{{init.info.name}}</span>
 					</div>
 					<div class="text item">
-						故乡: {{init.info.home_province}} - {{init.info.home_city}} - - {{init.info.home_area}}
+						故乡: <span>{{init.info.home_province}} - {{init.info.home_city}} - {{init.info.home_area}}</span>
 					</div>
 					<div class="text item">
-						所在地: {{init.info.my_province}} - {{init.info.my_city}} - - {{init.info.my_area}}
+						所在地: <span>{{init.info.my_province}} - {{init.info.my_city}} - {{init.info.my_area}}</span>
 					</div>
 					<div class="text item">
-						邮箱: {{init.info.email}}
+						邮箱: <span>{{init.info.email}}</span>
 					</div>
 					<div class="text item">
-						扣扣: {{init.info.qq}}
+						扣扣: <span>{{init.info.qq}}</span>
 					</div>
 					<div class="text item">
-						微信: {{init.info.wx}}
+						微信: <span>{{init.info.wx}}</span>
 					</div>
 					<div class="text item">
-						个人博客: {{init.info.url}}
+						个人博客: <span>{{init.info.url}}</span>
 					</div>
 					<div class="text item">
-						Github: {{init.info.github}}
+						Github: <span>{{init.info.github}}</span>
 					</div>
 					<div class="text item">
-						Gitocs: {{init.info.gitosc}}
+						Gitocs: <span>{{init.info.gitosc}}</span>
 					</div>
 				</el-col>
 				<el-col :span="18" class="p20  background">

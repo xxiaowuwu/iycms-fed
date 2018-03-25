@@ -86,7 +86,7 @@
 		overflow: hidden;
 	}
 	.experiment ul li p{
-		height: 84px;
+		height: 82px;
 		font-size: 14px;
 		color: #666;
 		text-overflow: ellipsis;

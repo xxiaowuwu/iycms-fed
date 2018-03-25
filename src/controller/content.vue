@@ -10,19 +10,15 @@
 				  	
 				  	<div class="info">
 				  			<p>
-				  			所属分类: <a href="content.vue23">php</a> 发表时间: <span>2017-24-15 11:55:55</span> 最后更新时间: <span>2017-24-15 11:55:55</span> </p>
-				  			<p>浏览量: <span>2015</span> TAG: 
-				  			<el-tag size="mini">超小标签</el-tag>
-				  			<el-tag size="mini">超小标签</el-tag>
-				  			<el-tag size="mini">超小标签</el-tag>
-				  			<el-tag size="mini">超小标签</el-tag>
-				  			<el-tag size="mini">超小标签</el-tag>
-				  			<el-tag size="mini">超小标签</el-tag>
+				  			所属分类: <a :href="'/article/t/'+article.type">{{article.typename}}</a> 发表时间: <span>{{article.time}}</span>
+							   最后更新: <span>{{article.update}}</span> </p>
+				  			<p>浏览量: <span>{{a}}</span> TAG: 
+				  			<el-tag v-for="vo in article.tag" size="mini">{{vo}}</el-tag> 
 				  			</p>
 				  			<p class="warning">
-				  				本文标题: 你有仍人有仍人有仍仍人脸有<Br />
-				  				本文链接: http://23423234<br />
-				  				版权声明: 若无特殊注明，本文皆为《 读心印 》原创，转载请保留文章出处。
+				  				本文标题: {{article.title}}<Br />
+				  				本文链接: {{article.url}}<br />
+				  				版权声明: 若无特殊注明，本文皆为《 {{init.info.nick || init.info.name}} 》原创，转载请保留文章出处。
 				  				
 						  	</p>
 				  		</div>
@@ -57,11 +53,13 @@
 
 <script>
 	export default {
+		props: ['init'],
 		data() {
 			return {
 				show:false,
 				article:{},
-				content:''
+				content:'',
+				a:0,
 			}
 		},
 		created() {			
@@ -85,6 +83,10 @@
 					self.$message.error('服务器异常');
 				}});
 			}
+
+			//人气
+			this.$emit("gets",{url:'/api/article/a.html?id='+id,success:function(e){self.a = e.data.a;}});
+
 		},
 		methods: {
 			setB: function(){

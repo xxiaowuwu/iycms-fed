@@ -53,6 +53,9 @@
 	background-color: var(--color);
 }
 
+.el-tag--mini + .el-tag--mini{
+	margin-left: 5px;
+}
 
 /*全局样式*/
 
@@ -795,6 +798,9 @@ div.title a {
 .info-content .item {
 	margin-bottom: 5px;
 	color: #666;
+}
+.info-content span {
+	font-size: 14px
 }
 
 .work {
