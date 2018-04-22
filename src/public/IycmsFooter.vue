@@ -12,7 +12,7 @@
 						<h2>相关链接</h2>
 						<p>
 							<router-link to="/article">博文</router-link>
-							<router-link to="/archive">归档</router-link>
+							<!-- <router-link to="/archive">归档</router-link> -->
 							<router-link to="/leave">留言</router-link>
 							<router-link to="/experiment">实验室</router-link>
 						</p>
@@ -34,8 +34,8 @@
 					<a href="http://www.miitbeian.gov.cn/" target="_blank">{{init.web.beian}}</a></div>
 				<div class="r">
 					<i class="iconfont">&#xe654;</i>
-					<i class="iconfont">&#xe63c;</i>
-					<i class="iconfont">&#xeee2;</i>
+					<a :href="'http://wpa.qq.com/msgrd?v=3&uin='+init.info.qq+'&site=qq&menu=yes'" target="_blank"><i class="iconfont">&#xe63c;</i></a>
+					<a :href="init.info.github" target="_blank"><i class="iconfont">&#xeee2;</i></a>
 				</div>
 			</div>
 		</div>
@@ -72,20 +72,25 @@
 	.el-footer .container .main div h2 {
 		margin-bottom: 10px;
 	}
-	
+	.el-footer .container a{
+		color: #CCCCCC;
+	}
+	.el-footer .container a:hover{
+		color:var(--color);
+	}
 	.el-footer .container .main p {
 		font-size: 14px;
 	}
 	
 	.el-footer .container .main a {
 		margin-right: 10px;
-		color: #CCCCCC;
 	}
 	
 	.el-footer .container .copyright {
 		text-align: center;
 		margin-top: 20px;
 	}
+	
 	.el-footer .container .copyright i{
 		font-size: 30px;
 		margin: 0 0 0 5px;

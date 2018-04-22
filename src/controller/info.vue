@@ -81,7 +81,7 @@
 								<div class="date l">{{vo.date_start}}</div>
 								<div class="content l">
 									<div>
-										<h3 class="l">{{vo.department}}</h3>
+										<h3 class="l">{{vo.company}}</h3>
 										<span class="r">至{{vo.date_end}}</span>
 									</div>
 									<div>
@@ -90,7 +90,7 @@
 									</div>
 									<div class="workbody">
 										<h4>工作内容</h4>
-										<p>{{vo.body}}</p>
+										<p v-html="vo.body"></p>
 									</div>
 									
 								</div>
@@ -114,6 +114,7 @@
 		created() {
 			this.$emit("SetHeader", true);
 			this.$emit("SetScrollTop");
+			sessionStorage['title'] = document.title = "关于我 - "+(this.init.info.nick || this.init.info.name)+ "的博客"
 		},
 		methods: {
 

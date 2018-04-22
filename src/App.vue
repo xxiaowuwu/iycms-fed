@@ -33,7 +33,8 @@
 	export default {
 		data() {
 			return {
-				host: "http://www.blog.com", //api接口
+				//host: "http://www.blog.com", //api接口
+				host: "http://blog.php127.com", //api接口
 				show: false, //显示页面
 				ShowHeader: false, //导航切换
 				top: false, //返回顶部
@@ -65,13 +66,13 @@
 		},
 		created: function(){
 			var self = this;
-			
+
 			if(sessionStorage.init){
 				self.show = true;
 				self.init = JSON.parse(sessionStorage.init);
 			}else{
 				//加载初始数据
-				this.gets({url:'/api.html',success:function(e){
+				this.gets({url:'/api/index.html',success:function(e){
 					if(e.status==200){
 						self.show = true;
 						self.init = e.data;
@@ -83,6 +84,29 @@
 					self.$message.error('服务器异常');
 				}});
 			}
+
+			//切换浏览器标签 切换标题
+			var hiddenProperty = 'hidden' in document ? 'hidden' :
+				'webkitHidden' in document ? 'webkitHidden' :
+				'mozHidden' in document ? 'mozHidden' :
+				null;
+			var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+			var Tiao;
+			var onVisibilityChange = function(){
+				if (!document[hiddenProperty]) {
+					clearInterval(Tiao);
+					document.title = sessionStorage['title']
+
+				}else{
+					var a = false;
+					Tiao = setInterval(function(){
+						document.title = a ? "千万别走,BUG出现!!!" : "➟千万别走,BUG出现!!!";
+						a = !a;
+					},50);
+				}
+			}
+			document.addEventListener(visibilityChangeEvent, onVisibilityChange);
+
 		},
 		methods: {
 			//导航状态

@@ -1,13 +1,14 @@
 /*阿里巴巴图标库*/
 
 @font-face {
-  font-family: 'iconfont';  /* project id 448084 */
-  src: url('//at.alicdn.com/t/font_448084_7gq71oik99lzncdi.eot');
-  src: url('//at.alicdn.com/t/font_448084_7gq71oik99lzncdi.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_448084_7gq71oik99lzncdi.woff') format('woff'),
-  url('//at.alicdn.com/t/font_448084_7gq71oik99lzncdi.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_448084_7gq71oik99lzncdi.svg#iconfont') format('svg');
-}
+	font-family: 'iconfont';  /* project id 448084 */
+	src: url('//at.alicdn.com/t/font_448084_shd721e32t7kqpvi.eot');
+	src: url('//at.alicdn.com/t/font_448084_shd721e32t7kqpvi.eot?#iefix') format('embedded-opentype'),
+	url('//at.alicdn.com/t/font_448084_shd721e32t7kqpvi.woff') format('woff'),
+	url('//at.alicdn.com/t/font_448084_shd721e32t7kqpvi.ttf') format('truetype'),
+	url('//at.alicdn.com/t/font_448084_shd721e32t7kqpvi.svg#iconfont') format('svg');
+  }
+
 .iconfont {
 	font-family: "iconfont" !important;
 	font-size: 16px;
@@ -82,17 +83,17 @@ a:hover {
 }
 /* 选中后颜色 */
 ::selection {
-    background:var(--color); 
+    background:var(--color);
     color:#fff;
 }
 
 ::-moz-selection {
-    background:var(--color); 
+    background:var(--color);
     color:#fff;
 }
 
 ::-webkit-selection {
-    background:var(--color); 
+    background:var(--color);
     color:#fff;
 }
 
@@ -109,9 +110,7 @@ h5 {
 	font-weight: initial;
 }
 
-span {
-	color: #999;
-}
+
 
 .l {
 	float: left;
@@ -160,11 +159,15 @@ span {
 	margin: 0 auto;
 }
 
+.container span {
+  color: #999;
+}
+
 .el-container {
 	padding: 80px 0 20px 0;
 	background: #FFF;
 	background-image:url(../img/bug.png),url(../img/bj.png);
-	
+
 }
 
 
@@ -858,3 +861,20 @@ div.title a {
 	color: #999;
 	margin-top: 10px;
 }
+
+
+/*QQ表情*/
+.qqbq{
+  width: 372px;
+  height: 153px;
+  position: absolute;
+  background-color: #FFF;
+  padding: 5px;
+  border: 1px #dcdfe6 solid;
+  z-index: 109;
+}
+
+.qqbq li{
+  float: left;
+}
+

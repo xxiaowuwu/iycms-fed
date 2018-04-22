@@ -77,6 +77,8 @@
 		created(){
 			this.$emit("SetHeader",false);
 			this.$emit("SetScrollTop");
+			sessionStorage['title'] = document.title = "首页 - "+(this.init.info.nick || this.init.info.name)+ "的博客"
+
 		}
 	}
 </script>

@@ -76,7 +76,7 @@
 
 <script>
 	export default {
-		name: 'index',
+		props: ['init'],
 		data() {
 			return {
 				
@@ -85,6 +85,7 @@
 		created() {
 			this.$emit("SetHeader", true);
 			this.$emit("SetScrollTop");
+			sessionStorage['title'] = document.title = "归档 - "+(this.init.info.nick || this.init.info.name)+ "的博客"
 		},
 		methods: {
 			 handleSizeChange(val) {

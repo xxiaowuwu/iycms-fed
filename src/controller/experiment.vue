@@ -23,6 +23,7 @@
 </template>
 <script>
 	export default {
+		props: ['init'],
 		data() {
 			return {
 				show:false,
@@ -32,6 +33,7 @@
 		created() {
 			this.$emit("SetHeader", true);
 			this.$emit("SetScrollTop");
+			sessionStorage['title'] = document.title = "实验室 - "+(this.init.info.nick || this.init.info.name)+ "的博客"
 			var self = this;
 			var name = 'experiment';
 			if (sessionStorage[name]){

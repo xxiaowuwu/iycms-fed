@@ -92,6 +92,7 @@
 			this.t = this.$route.params.t ? this.$route.params.t : 0;
 			this.$emit("SetHeader", true);
 			this.$emit("SetScrollTop");
+			sessionStorage['title'] = document.title = "博文 - "+(this.init.info.nick || this.init.info.name)+ "的博客"
 			this.getCategory();	
 		},
 		methods: {
