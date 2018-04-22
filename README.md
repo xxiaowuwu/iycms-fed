@@ -1,5 +1,5 @@
 # IYCMS 博客管理系统 前端源代码 [后端?](https://github.com/aa24615/iycms)
-> 基于 Vue.js + element-ui 开发 由 vue-cli webpack 编译
+> 基于 Vue.js + element-ui 开发 由 vue-cli webpack 编译   
 > 先睹为快->传送门 [http://blog.php127.com](http://blog.php127.com)
 ## 核心文件 (之外的可选文件)
 ```
@@ -58,5 +58,5 @@ $ npm run build
 
 ## 联系我们
 
-QQ群: [324098841](http://shang.qq.com/wpa/qunwpa?idkey=6f5462146888da75feaaa1fe1ab3addfcea63f6454548238033c6a91fa610e4e)   
+QQ群: [324098841](http://shang.qq.com/wpa/qunwpa?idkey=6f5462146888da75feaaa1fe1ab3addfcea63f6454548238033c6a91fa610e4e)
 QQ号: [839024615](http://wpa.qq.com/msgrd?v=3&uin=839024615&site=qq&menu=yes)
