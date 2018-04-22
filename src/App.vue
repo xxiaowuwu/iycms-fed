@@ -1,14 +1,15 @@
 <template>
 	<div id="app"
 		v-loading.fullscreen.lock="!show"
-		element-loading-text="数据加载中..."
+		:element-loading-text="loading"
 		element-loading-background="rgba(0, 0, 0, 0.5)"
 		@click="floating">
+
 		<!--头部-->
 		<IycmsHeader v-if="show" :nav="nav" :ShowHeader="ShowHeader" @SetHeader="set_header"  @scrollTop="set_scrollTop" ></IycmsHeader>
 		<!--主体~路由-->
 		<transition name="el-fade-in"> <!-- 动画效果 -->
-			<router-view v-if="show" :init="init" @SetHeader="set_header"  @SetScrollTop="returnTop" @gets="gets" ></router-view>
+			<router-view v-if="show" :init="init" @SetHeader="set_header"  @SetScrollTop="returnTop" @gets="gets"  @posts="posts" ></router-view>
 		</transition>
 		<!--尾部-->
 		<IycmsFooter v-if="show" :init="init"></IycmsFooter>
@@ -33,9 +34,9 @@
 	export default {
 		data() {
 			return {
-				//host: "http://www.blog.com", //api接口
-				host: "http://blog.php127.com", //api接口
+				host: "http://www.blog.com", //api接口
 				show: false, //显示页面
+        loading:"数据加载中...",
 				ShowHeader: false, //导航切换
 				top: false, //返回顶部
 				init:{},
@@ -61,14 +62,43 @@
 						{name:"php",show:false,yy:0,xx:0,opacity:1},
 					],
 					i:0
-				}
+				},
+        isMobile:false
 			};
 		},
 		created: function(){
+
+      var ua = navigator.userAgent;
+
+      var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+          isIphone = ipad || ua.match(/(iPhone\sOS)\s([\d_]+)/),
+          isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+          isMobile = isIphone || isAndroid;
+      if(isMobile){
+        this.loading = "请使用电脑访问"
+        return;
+      }
+
+
+      if (!!window.ActiveXObject || "ActiveXObject" in window) {
+        this.loading = "请勿使用IE浏览器,或兼容模式! 推荐使用谷歌,360浏览器"
+        return;
+      }
+
+
+
 			var self = this;
 
+      if(document.domain=="127.0.0.1" || document.domain=="www.blog.com"){
+        this.host = "http://www.blog.com";
+      }else{
+        this.host = "http://blog.php127.com";
+      }
+
 			if(sessionStorage.init){
-				self.show = true;
+        setTimeout(function () {
+          self.show = true; //重新加载,延时一秒
+        },1000)
 				self.init = JSON.parse(sessionStorage.init);
 			}else{
 				//加载初始数据
@@ -161,9 +191,20 @@
 				},1)
 			},
 			//封装ajax get请求
-			gets:function({url,success,error}){
-				this.$http.get(this.host+url).then(success).catch(error);
-			}
+      gets:function({url,success,error}){
+        this.$http.get(this.host+url).then(success).catch(error);
+      },
+      //封装ajax post请求
+      posts:function({url,data,success,error}){
+
+        this.$http({
+          method: 'post',
+          url: this.host+url,
+          data: this.$qs.stringify(data)
+        }).then(success).catch(error);
+
+        //this.$http.post(this.host+url,data).then(success).catch(error);
+      }
 		},
 
 

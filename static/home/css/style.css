@@ -8,7 +8,9 @@
 	url('//at.alicdn.com/t/font_448084_shd721e32t7kqpvi.ttf') format('truetype'),
 	url('//at.alicdn.com/t/font_448084_shd721e32t7kqpvi.svg#iconfont') format('svg');
   }
-
+*{
+  font-family: 'PingFang SC','Microsoft YaHei',SimHei,Arial,SimSun !important;
+}
 .iconfont {
 	font-family: "iconfont" !important;
 	font-size: 16px;
@@ -664,6 +666,16 @@ div.title a {
 	cursor: pointer;
 }
 
+.leave .editor{
+  background-color: #fff;
+  border: solid 1px #dcdfe6;
+  border-radius: 5px;
+  padding: 10px;
+  height: 150px;
+  margin-bottom: 15px;
+  overflow: auto;
+}
+
 .leave-content {
 	margin-top: 20px;
 	overflow: hidden;
@@ -673,6 +685,7 @@ div.title a {
 	margin-bottom: 20px;
 	width: 900px;
 	margin-right: 20px;
+  min-height: 500px;
 }
 
 .leave-content .hot {
@@ -745,6 +758,7 @@ div.title a {
 	border-left: solid 1px #CCCCCC;
 	width: 800px;
 	position: relative;
+  min-height: 105px;
 }
 
 .leave-content>ul li .content i {
@@ -761,7 +775,7 @@ div.title a {
 .leave-content>ul li .content p {
 	font-size: 14px;
 	color: #333;
-	/*height: 40px;*/
+	min-height: 39px;
 	display: block;
 	overflow: hidden;
 	margin-top: 2px;
@@ -779,6 +793,7 @@ div.title a {
 	padding-top: 5px;
 	width: 100%;
 }
+
 
 
 /*个人资料*/

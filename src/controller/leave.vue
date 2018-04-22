@@ -1,6 +1,6 @@
 <template>
 	<el-container>
-		<div class="container">
+		<div class="container" v-loading.fullscreen.lock="!show" element-loading-text="拼命加载中" element-loading-background="rgba(255, 255, 255, 0.5)">
 			<div class="leave">
 				<!--<el-input type="textarea" :rows="5" resize="none" placeholder="请输入想您说的话..." v-model="content">-->
 				<!--</el-input>-->
@@ -16,35 +16,37 @@
           </ul>
 					<i @click="setIMG" class="iconfont">&#xe791;</i>
 					<i @click="setCODE" class="iconfont">&#xe6b9;</i>
-					<el-button class="r">提交留言</el-button>
+					<el-button @click="postLeave" class="r">提交留言</el-button>
 				</div>
 			</div>
 			<div class="leave-content">
+
 				<ul class="l">
-					<li v-for="vo in [10,12,13,14,15,16,17,19,20,21,22,23]">
-						<div class="l img"><img src="/static/home/img/article-li.jpg" /></div>
+					<li v-for="vo in list">
+						<div class="l img"><img :src="vo.head" /></div>
 						<div class="l content">
-							<h4>姓名</h4>
-							<p>这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留</p>
-							<span>2015-15-15 12:23:12 来自xxxxxx x  <a href="javascript:;">回复</a></span>
-							<i class="iconfont">&#xe6f1;12</i>
+							<h4>{{vo.name || "匿名"}}</h4>
+							<p v-html="vo.content"></p>
+							<span>{{vo.time}} 来自{{vo.region}} {{vo.os}} {{vo.browser}} {{vo.lang}}<!--<a href="javascript:;">回复</a>--></span>
+							<i class="iconfont">&#xe6f1;{{vo.id}}</i>
 
-							<div class="reply">
-								<h4>姓名</h4>
-								<p><a href="">@博主</a> 这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留这是留言这是留言这是留言这是留</p>
-								<span>2015-15-15 12:23:12 来自xxxxxx x </span>
-							</div>
-
-
-							<div class="reply">
-								<h4>姓名</h4>
-								<p>这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留</p>
-								<span>2015-15-15 12:23:12 来自xxxxxx x </span>
-							</div>
+							<!--<div class="reply">-->
+								<!--<h4>姓名</h4>-->
+								<!--<p><a href="">@博主</a> 这是留言这是留言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留言这是留<br />言这是留言这是留言这是留这是留言这是留言这是留言这是留</p>-->
+								<!--<span>2015-15-15 12:23:12 来自xxxxxx x </span>-->
+							<!--</div>-->
 
 						</div>
 					</li>
+
+          <el-alert v-show="list.length==0" title="没有数据" type="info" description=" " :closable="false" show-icon></el-alert>
+
+
+
 				</ul>
+
+
+
 					<div class="hot l">
 						<div class="title"><h1 class="l">人气文章</h1> <router-link class="r" to="/">>更多</router-link></div>
 						<div class="content">
@@ -65,11 +67,13 @@
 
 				</div>
 
-				<div class="page">
-					<el-pagination background :page-size="30"   @size-change="handleSizeChange"
-      @current-change="handleCurrentChange" layout="prev, pager, next"  :total="100"> </el-pagination>
-				</div>
-		</div>
+      <div class="page" v-show="list.length>0">
+        <el-pagination background :page-size="page.size" @current-change="getPage" layout="prev, pager, next"  :total="page.count"> </el-pagination>
+      </div>
+
+
+
+    </div>
 	</el-container>
 </template>
 
@@ -78,10 +82,16 @@
 		props: ['init'],
 		data() {
 			return {
+        show:false,
+        page:{
+          count:0,
+          size:10
+        },
 				content: "",
         content2: "",
         showFACE: false,
-        qqbq:[]
+        qqbq:[],
+        list:[]
 			}
 		},
 		created() {
@@ -91,6 +101,7 @@
 			this.$emit("SetHeader", true);
 			this.$emit("SetScrollTop");
 			sessionStorage['title'] = document.title = "留言 - "+(this.init.info.nick || this.init.info.name)+ "的博客"
+      this.getPage(1);
 		},
 		methods: {
       setContent:function($e){//模拟双向绑定
@@ -119,9 +130,9 @@
           cancelButtonText: '取消',
           showClose:false
         }).then(({ value }) => {
-          this.content += "<b>"+value+"</b>";
+          this.content = this.content2 = this.content2+'<a href="'+value+'">'+value+'</a>';
         });
-        this.content = this.content2 = this.content2+'<a href="链接地址">链接名称</a>';
+
 			},
       //显示表情
 			setFACE: function(){
@@ -162,17 +173,64 @@
         }).then(({ value }) => {
           this.content = this.content2 = this.content2+"<pre>"+value+"</pre>";
         });
-			}
+			},
+      postLeave:function () {
+        var self = this;
+        if(self.content2.length<10){
+          self.$message.error('留言内容不得少于10个字');
+          return;
+        }
+        this.$emit("posts",{
+          url:'/api/leave/add.html',
+          data:{
+            content:this.content2
+          },
+          success:function(e){
+            self.showFACE = false;
+            if(e.status==200){
+                if(e.data.code==1){
+                  self.content = "";
+                  self.content2 = "";
+                  self.$message.success("留言成功");
+                  sessionStorage['leave_1'] = "";
+                  self.getPage(1);
+                }else{
+                  self.$message.error(e.data.msg);
+                }
+            }else{
+              self.$message.error('服务器异常 状态码' + e.status);
+            }
+          },error:function(e){
+            self.$message.error('服务器异常');
+          }});
+
+      },
+      getPage(p) { //切换页面
+        var self = this;
+        self.show = false;
+        var name = 'leave_'+p;
+        if (sessionStorage[name]){
+          var data  = JSON.parse(sessionStorage[name]);
+          self.show = true;
+          self.list = data.list;
+          self.page.count = data.count;
+        }else{
+          this.$emit("gets",{url:'/api/leave/index.html?p='+p,success:function(e){
+              if(e.status==200){
+                self.show = true;
+                self.list = e.data.list;
+                self.page.count = e.data.count;
+                sessionStorage[name] = JSON.stringify(e.data);
+              }
+            },error:function(e){
+              self.$message.error('服务器异常');
+            }});
+        }
+      }
 		}
 	}
 </script>
 
 <style>
-  .editor{
-    background-color: #fff;
-    border: solid 1px #dcdfe6;
-    border-radius: 5px;
-    padding: 10px;
-    height: 150px;
-  }
+
 </style>

@@ -5,29 +5,29 @@
 				<h1 v-text="article.title"></h1>
 			</div>
 			<div class="container background p20">
-			
+
 				  	<div class="body" v-html="article.body"></div>
-				  	
+
 				  	<div class="info">
 						<p>
 						所属分类: <a :href="'/article/t/'+article.type">{{article.typename}}</a> 发表时间: <span>{{article.time}}</span>
 							最后更新: <span>{{article.update}}</span> </p>
-						<p>浏览量: <span>{{a}}</span> TAG: 
-						<el-tag v-for="vo in article.tag" size="mini">{{vo}}</el-tag> 
+						<p>浏览量: <span>{{a}}</span> TAG:
+						<el-tag v-for="vo in article.tag" size="mini">{{vo}}</el-tag>
 						</p>
 						<p class="warning">
 							本文标题: {{article.title}}<Br />
 							本文链接: {{article.url}}<br />
 							版权声明: 若无特殊注明，本文皆为《 {{init.info.nick || init.info.name}} 》原创，转载请保留文章出处。
-							
+
 						</p>
 				  	</div>
 					<div class="share">
 						<a href="javascript:;" @click="onZan" title="点个赞"><i class="iconfont">&#xe652;</i>{{article.z}}</a>
-						<a :href="article.qz_share" title="分享到QQ空间"><i class="iconfont">&#xe6e4;</i></a>
-						<a :href="article.qq_share" title="分享给QQ好友"><i class="iconfont">&#xe63c;</i></a>
-						<a :href="article.wb_share" title="分享到微博"><i class="iconfont">&#xe6a3;</i></a>
-						<a href="" title="分享到微信朋友圈"><i class="iconfont">&#xe6e2;</i></a>
+						<a :href="article.qz_share" target="_blank" title="分享到QQ空间"><i class="iconfont">&#xe6e4;</i></a>
+						<a :href="article.qq_share" target="_blank" title="分享给QQ好友"><i class="iconfont">&#xe63c;</i></a>
+						<a :href="article.wb_share" target="_blank" title="分享到微博"><i class="iconfont">&#xe6a3;</i></a>
+						<a href="#" title="分享到微信朋友圈"><i class="iconfont">&#xe6e2;</i></a>
 					</div>
 
 					<!-- <div class="comments">
@@ -42,8 +42,8 @@
 							<el-button class="r">提交评论</el-button>
 						</div>
 					</div> -->
-				  	
-				  	
+
+
 				  	<!-- <div class="toc">
 					  	<div class="title"><h1 class="l">目录[TOC]</h1></div>
 						<div class="content">
@@ -58,7 +58,7 @@
 	</el-container>
 </template>
 <script>
-	
+
 	export default {
 		props: ['init'],
 		data() {
@@ -70,11 +70,11 @@
 			}
 		},
 		created() {
-			
+
 			var id = this.$route.params.id;
 			this.$emit("SetHeader", true);
 			this.$emit("SetScrollTop");
-			
+
 			var self = this;
 			var name = 'content_'+id;
 			if (sessionStorage[name]){
@@ -100,7 +100,7 @@
 					self.$message.error('服务器异常');
 				}});
 			}
-	
+
 			//人气
 			this.$emit("gets",{url:'/api/article/a.html?id='+id,success:function(e){self.a = e.data.a;}});
 
@@ -155,7 +155,7 @@
 	.content .container {
 		position: relative;
 	}
-	
+
 	.content .container .toc{
 		width: 200px;
 		position: absolute;
@@ -165,14 +165,14 @@
 	.content .container .body *{
 		max-width: 100%;
 	}
-	
+
 	.content .container .info{
 		color: #333;
 		border-top: dashed 1px #ccc;
 		padding: 10px 0;
 		margin: 20px 0 10px 0;
 	}
-	
+
 	.content .container .info span{
 		color: #999;
 	}
@@ -185,7 +185,7 @@
 		color: #666;
 		background-color: rgba(0,0,0,0.05);
 	}
-	
+
 	.content .share{
 		border-top: dashed 1px #ccc;
 		padding: 20px 0;
@@ -204,24 +204,24 @@
 		border-top: dashed 1px #ccc;
 		padding: 20px 0;
 	}
-	
-	
+
+
 	.content .container .comments .tools {
 		margin-top: 5px;
 	}
-	
+
 	.content .container .comments .tools i {
 		font-size: 30px;
 		color: #999999;
 	}
-	
+
 	.content .container .comments .tools i:hover {
 		color: var(--color);
 		cursor: pointer;
 	}
 
 
-	
+
 	.content-head{
 		width: 100%;
 		height: 200px;
@@ -243,7 +243,7 @@
 		background-repeat: no-repeat;
         background-position: center;
         background-size: cover;
-     
+
       	-webkit-filter: blur(50px);
         -moz-filter: blur(50px);
         -o-filter: blur(50px);
@@ -266,5 +266,5 @@
 		    height: 100%;
 		    background-color: rgba(0, 0, 0, .5);
 	}
-	
+
 </style>
