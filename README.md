@@ -2,7 +2,19 @@
 
 > 基于 Vue.js + element-ui 开发 由 vue-cli webpack 编译
 
+## 核心文件
+```
+/src
+/static
+/index.html
+
+```
+
+
 ## 开发前请安装node.js 并运行以下命令安装vue以及依赖
+
+
+
 
 ``` bash
 $ npm i vue -g
@@ -33,4 +45,7 @@ $ npm run dev
 $ npm run build
 # 编译后,文件会存放到 /dist/下
 ```
+
+
+
 
