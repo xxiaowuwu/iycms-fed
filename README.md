@@ -36,6 +36,9 @@ $ npm i
 ```
 ## 如何调试
 
+> 先配置api根地址
+> 在 [/src/App.vue](src/App.vue) 文件中 内附注释
+
 ``` bash
 $ npm run dev
 # 浏览器打开 http://127.0.0.1:8080 即可看到实时界面
@@ -48,5 +51,10 @@ $ npm run build
 ```
 
 
+
+## 如何放到ThinkPHP下使用
+
+> 打包后,将/dist/static 下的 home 文件夹复制到
+> 后端源代码中 /public/static 下
 
 
